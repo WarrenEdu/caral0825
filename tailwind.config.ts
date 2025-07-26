@@ -18,6 +18,9 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'barlow': ['Barlow', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -51,6 +54,13 @@ export default {
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
+				},
+				caral: {
+					ochre: 'hsl(var(--caral-ochre))',
+					terracotta: 'hsl(var(--caral-terracotta))',
+					sand: 'hsl(var(--caral-sand))',
+					earth: 'hsl(var(--caral-earth))',
+					stone: 'hsl(var(--caral-stone))'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
