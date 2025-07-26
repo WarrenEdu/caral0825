@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, Car, Camera, Star } from "lucide-react";
+import { motion } from "framer-motion";
 
 const RouteSection = () => {
   const routeStops = [
@@ -38,9 +39,15 @@ const RouteSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 section-overlay relative z-10">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
           <p className="text-caral-ochre font-medium text-lg mb-4 tracking-wide">
             TURISMO ARQUEOLÓGICO
           </p>
@@ -51,33 +58,54 @@ const RouteSection = () => {
             Embárcate en un viaje único a través de la civilización más antigua de América. 
             Descubre los sitios arqueológicos que revelan 5000 años de historia
           </p>
-        </div>
+        </motion.div>
 
         {/* Route Info Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <motion.div 
+          className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
           {routeInfo.map((info, index) => (
-            <Card key={index} className="text-center shadow-card border-0">
-              <CardContent className="p-6">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-caral-ochre/10 rounded-full mb-4">
-                  <info.icon className="h-6 w-6 text-caral-ochre" />
-                </div>
-                <p className="text-sm text-muted-foreground mb-1">{info.label}</p>
-                <p className="font-semibold text-foreground">{info.value}</p>
-              </CardContent>
-            </Card>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 * index }}
+              viewport={{ once: true }}
+            >
+              <Card className="text-center shadow-card border-0 hover-scale-smooth">
+                <CardContent className="p-6">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-caral-ochre/10 rounded-full mb-4">
+                    <info.icon className="h-6 w-6 text-caral-ochre" />
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-1">{info.label}</p>
+                  <p className="font-semibold text-foreground">{info.value}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Route Stops */}
         <div className="space-y-8">
           {routeStops.map((stop, index) => (
-            <Card key={stop.id} className="shadow-card border-0 overflow-hidden">
+            <motion.div
+              key={stop.id}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <Card className="shadow-card border-0 overflow-hidden hover-scale-smooth">
               <div className={`grid lg:grid-cols-2 gap-0 ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
                 <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
                   <img 
                     src={stop.image} 
                     alt={stop.name}
-                    className="w-full h-64 lg:h-full object-cover"
+                    className="w-full h-64 lg:h-full object-cover hover-scale-smooth"
                   />
                 </div>
                 <div className="p-8 lg:p-12 flex flex-col justify-center">
@@ -124,6 +152,7 @@ const RouteSection = () => {
                 </div>
               </div>
             </Card>
+            </motion.div>
           ))}
         </div>
 

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { motion } from "framer-motion";
 
 const ContactSection = () => {
   const contactInfo = [
@@ -29,9 +30,15 @@ const ContactSection = () => {
   ];
 
   return (
-    <section className="py-20 section-gradient">
+    <section className="py-20 section-overlay relative z-10">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
           <p className="text-caral-ochre font-medium text-lg mb-4 tracking-wide">
             CONTÁCTANOS
           </p>
@@ -42,11 +49,16 @@ const ContactSection = () => {
             ¿Tienes preguntas sobre nuestros servicios o quieres planificar tu visita? 
             Estamos aquí para ayudarte
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Contact Information */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
             <h3 className="text-2xl font-bold text-foreground mb-8">
               Información de Contacto
             </h3>
@@ -83,10 +95,15 @@ const ContactSection = () => {
                 </div>
               </div>
             </Card>
-          </div>
+          </motion.div>
 
           {/* Contact Form */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
             <Card className="shadow-elegant border-0">
               <CardHeader>
                 <CardTitle className="text-2xl font-bold text-foreground">
@@ -151,7 +168,7 @@ const ContactSection = () => {
                 </Button>
               </CardContent>
             </Card>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

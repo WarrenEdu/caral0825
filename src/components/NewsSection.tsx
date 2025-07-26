@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 const NewsSection = () => {
   const news = [
@@ -31,9 +32,15 @@ const NewsSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 section-overlay relative z-10">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
           <p className="text-caral-ochre font-medium text-lg mb-4 tracking-wide">
             ÚLTIMAS NOTICIAS
           </p>
@@ -44,23 +51,30 @@ const NewsSection = () => {
             Mantente informado sobre los últimos descubrimientos, eventos y actividades 
             de la Zona Arqueológica Caral
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {news.map((article) => (
-            <Card key={article.id} className="group shadow-card hover:shadow-elegant transition-all duration-300 border-0 overflow-hidden">
-              <div className="relative overflow-hidden">
-                <img 
-                  src={article.image} 
-                  alt={article.title}
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-caral-ochre text-white px-3 py-1 rounded-full text-sm font-medium">
-                    {article.category}
-                  </span>
+          {news.map((article, index) => (
+            <motion.div
+              key={article.id}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <Card className="group card-hover-line shadow-card hover:shadow-elegant transition-all duration-500 border-0 overflow-hidden">
+                <div className="relative overflow-hidden">
+                  <img 
+                    src={article.image} 
+                    alt={article.title}
+                    className="w-full h-48 object-cover hover-scale-smooth"
+                  />
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-caral-ochre text-white px-3 py-1 rounded-full text-sm font-medium">
+                      {article.category}
+                    </span>
+                  </div>
                 </div>
-              </div>
               
               <CardHeader className="p-6">
                 <div className="flex items-center text-muted-foreground text-sm mb-3">
@@ -85,10 +99,17 @@ const NewsSection = () => {
                 </Button>
               </CardContent>
             </Card>
+            </motion.div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        <motion.div 
+          className="text-center mt-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
           <Button 
             variant="outline"
             size="lg"
@@ -96,7 +117,7 @@ const NewsSection = () => {
           >
             Ver todas las noticias
           </Button>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

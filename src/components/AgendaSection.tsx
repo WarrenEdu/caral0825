@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, MapPin, Users } from "lucide-react";
+import { motion } from "framer-motion";
 
 const AgendaSection = () => {
   const events = [
@@ -57,9 +58,15 @@ const AgendaSection = () => {
   };
 
   return (
-    <section className="py-20 section-gradient">
+    <section className="py-20 section-overlay relative z-10">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
           <p className="text-caral-ochre font-medium text-lg mb-4 tracking-wide">
             PRÓXIMOS EVENTOS
           </p>
@@ -70,11 +77,18 @@ const AgendaSection = () => {
             Descubre las actividades programadas en la Zona Arqueológica Caral. 
             Participa en nuestros eventos educativos y culturales
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {events.map((event) => (
-            <Card key={event.id} className="shadow-card hover:shadow-elegant transition-all duration-300 border-0">
+          {events.map((event, index) => (
+            <motion.div
+              key={event.id}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <Card className="card-hover-line shadow-card hover:shadow-elegant transition-all duration-500 border-0 hover-scale-smooth">
               <CardHeader className="pb-4">
                 <div className="flex items-start justify-between">
                   <div>
@@ -118,6 +132,7 @@ const AgendaSection = () => {
                 </Button>
               </CardContent>
             </Card>
+            </motion.div>
           ))}
         </div>
 
