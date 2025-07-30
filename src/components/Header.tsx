@@ -1,8 +1,17 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Globe, Facebook, Youtube, Instagram } from "lucide-react";
+import { Menu, X, Globe, Facebook, Youtube, Instagram, ChevronDown } from "lucide-react";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 import caralLogoBanner from "@/assets/caral-logo-banner.png";
 import zacLogo from "@/assets/zac-logo.png";
+import transparenciaLogo from "@/assets/transparencia-logo.png";
 import { motion } from "framer-motion";
 
 const Header = () => {
@@ -20,14 +29,38 @@ const Header = () => {
   }, []);
 
   const menuItems = [
-    "Institución",
-    "Museo Caral", 
-    "Ruta Caral",
-    "Conócenos",
-    "Comunicaciones",
-    "Publicaciones",
-    "Tienda Caral",
-    "Estadísticas"
+    {
+      title: "Institución",
+      items: ["¿Quiénes somos?", "Organización", "Alta dirección", "Directorio"]
+    },
+    {
+      title: "Museo Caral",
+      items: ["Salas Temáticas", "Experiencias Educativas", "Visitas mediadas", "Talleres Caral"]
+    },
+    {
+      title: "Ruta Caral",
+      items: ["Horarios y tarifas", "Viajes culturales", "Ciudad sagrada de caral", "Aspero", "Vichama", "Peñico"]
+    },
+    {
+      title: "Conócenos",
+      items: ["Historia de caral", "Investigaciones", "Descubrimientos", "Arqueología"]
+    },
+    {
+      title: "Comunicaciones",
+      items: ["Noticias", "Prensa", "Eventos", "Boletines"]
+    },
+    {
+      title: "Publicaciones",
+      items: ["Libros", "Revistas", "Artículos", "Documentos"]
+    },
+    {
+      title: "Tienda Caral",
+      items: []
+    },
+    {
+      title: "Estadísticas",
+      items: ["Visitantes", "Investigación", "Impacto"]
+    }
   ];
 
   return (
@@ -39,18 +72,21 @@ const Header = () => {
     >
       {/* Red Banner */}
       <div className="bg-red-600 h-12 flex items-center justify-center">
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center">
           <img 
             src={caralLogoBanner} 
             alt="Caral Logo" 
             className="h-8 w-auto object-contain"
           />
-          <span className="text-white font-bold text-xl tracking-wider">CARAL</span>
         </div>
         
         {/* Language & Portal buttons */}
         <div className="absolute right-4 flex items-center space-x-2 text-xs text-white">
-          <span>Portal de Transparencia</span>
+          <img 
+            src={transparenciaLogo} 
+            alt="Portal de Transparencia" 
+            className="h-6 w-auto object-contain"
+          />
           <span>|</span>
           <Button
             variant="ghost"
@@ -93,17 +129,41 @@ const Header = () => {
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-6">
-              {menuItems.map((item) => (
-                <Button 
-                  key={item}
-                  variant="ghost" 
-                  className={`${isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-caral-ochre'} hover:bg-caral-sand/20`}
-                >
-                  {item}
-                </Button>
-              ))}
-            </nav>
+            <NavigationMenu className="hidden lg:flex">
+              <NavigationMenuList>
+                {menuItems.map((menuItem) => (
+                  <NavigationMenuItem key={menuItem.title}>
+                    {menuItem.items.length > 0 ? (
+                      <>
+                        <NavigationMenuTrigger 
+                          className={`${isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-caral-ochre'} bg-transparent hover:bg-caral-sand/20 data-[state=open]:bg-caral-sand/20`}
+                        >
+                          {menuItem.title}
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                          <div className="w-48 p-2">
+                            {menuItem.items.map((subItem) => (
+                              <NavigationMenuLink
+                                key={subItem}
+                                className="block px-3 py-2 text-sm text-foreground hover:bg-caral-sand/20 hover:text-primary rounded-md cursor-pointer transition-colors"
+                              >
+                                {subItem}
+                              </NavigationMenuLink>
+                            ))}
+                          </div>
+                        </NavigationMenuContent>
+                      </>
+                    ) : (
+                      <NavigationMenuLink 
+                        className={`px-4 py-2 text-sm font-medium transition-colors ${isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-caral-ochre'} hover:bg-caral-sand/20 rounded-md cursor-pointer`}
+                      >
+                        {menuItem.title}
+                      </NavigationMenuLink>
+                    )}
+                  </NavigationMenuItem>
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
 
             {/* Mobile Menu Button */}
             <Button
@@ -124,14 +184,29 @@ const Header = () => {
         {isMenuOpen && (
           <div className="lg:hidden py-4 border-t border-border bg-white">
             <nav className="flex flex-col space-y-2">
-              {menuItems.map((item) => (
-                <Button 
-                  key={item}
-                  variant="ghost" 
-                  className="justify-start text-foreground hover:text-primary hover:bg-caral-sand/20"
-                >
-                  {item}
-                </Button>
+              {menuItems.map((menuItem) => (
+                <div key={menuItem.title} className="px-4">
+                  <Button 
+                    variant="ghost" 
+                    className="justify-start text-foreground hover:text-primary hover:bg-caral-sand/20 w-full"
+                  >
+                    {menuItem.title}
+                    {menuItem.items.length > 0 && <ChevronDown className="ml-auto h-4 w-4" />}
+                  </Button>
+                  {menuItem.items.length > 0 && (
+                    <div className="ml-4 mt-2 space-y-1">
+                      {menuItem.items.map((subItem) => (
+                        <Button
+                          key={subItem}
+                          variant="ghost"
+                          className="justify-start text-sm text-muted-foreground hover:text-primary hover:bg-caral-sand/20 w-full"
+                        >
+                          {subItem}
+                        </Button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
             </nav>
           </div>
