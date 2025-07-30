@@ -1,14 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Globe, Facebook, Youtube, Instagram, ChevronDown } from "lucide-react";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
 import caralLogoBanner from "@/assets/caral-logo-banner.png";
 import zacLogo from "@/assets/zac-logo.png";
 import transparenciaLogo from "@/assets/transparencia-logo.png";
@@ -18,6 +10,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [language, setLanguage] = useState("ES");
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -129,41 +122,43 @@ const Header = () => {
             </div>
 
             {/* Desktop Navigation */}
-            <NavigationMenu className="hidden lg:flex">
-              <NavigationMenuList>
-                {menuItems.map((menuItem) => (
-                  <NavigationMenuItem key={menuItem.title}>
-                    {menuItem.items.length > 0 ? (
-                      <>
-                        <NavigationMenuTrigger 
-                          className={`${isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-caral-ochre'} bg-transparent hover:bg-caral-sand/20 data-[state=open]:bg-caral-sand/20`}
-                        >
-                          {menuItem.title}
-                        </NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                          <div className="w-48 p-2">
-                            {menuItem.items.map((subItem) => (
-                              <NavigationMenuLink
-                                key={subItem}
-                                className="block px-3 py-2 text-sm text-foreground hover:bg-caral-sand/20 hover:text-primary rounded-md cursor-pointer transition-colors"
-                              >
-                                {subItem}
-                              </NavigationMenuLink>
-                            ))}
-                          </div>
-                        </NavigationMenuContent>
-                      </>
-                    ) : (
-                      <NavigationMenuLink 
-                        className={`px-4 py-2 text-sm font-medium transition-colors ${isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-caral-ochre'} hover:bg-caral-sand/20 rounded-md cursor-pointer`}
-                      >
-                        {menuItem.title}
-                      </NavigationMenuLink>
+            <nav className="hidden lg:flex items-center space-x-1">
+              {menuItems.map((menuItem) => (
+                <div 
+                  key={menuItem.title}
+                  className="relative"
+                  onMouseEnter={() => menuItem.items.length > 0 && setActiveDropdown(menuItem.title)}
+                  onMouseLeave={() => setActiveDropdown(null)}
+                >
+                  <Button 
+                    variant="ghost" 
+                    className={`${isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-caral-ochre'} hover:bg-caral-sand/20 flex items-center gap-1`}
+                  >
+                    {menuItem.title}
+                    {menuItem.items.length > 0 && (
+                      <ChevronDown className="h-4 w-4" />
                     )}
-                  </NavigationMenuItem>
-                ))}
-              </NavigationMenuList>
-            </NavigationMenu>
+                  </Button>
+                  
+                  {/* Dropdown Menu */}
+                  {menuItem.items.length > 0 && activeDropdown === menuItem.title && (
+                    <div className="absolute top-full left-0 mt-1 w-64 bg-black/90 backdrop-blur-sm rounded-lg shadow-lg border border-white/10 p-4 z-50">
+                      <div className="space-y-2">
+                        {menuItem.items.map((subItem) => (
+                          <a
+                            key={subItem}
+                            href="#"
+                            className="block px-3 py-2 text-sm text-white/90 hover:text-white hover:bg-white/10 rounded-md transition-colors"
+                          >
+                            {subItem}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </nav>
 
             {/* Mobile Menu Button */}
             <Button
