@@ -2,6 +2,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, Car, Camera, Star } from "lucide-react";
 import { motion } from "framer-motion";
+import caralRouteImg from "@/assets/caral-route.jpg";
+import vichamaRouteImg from "@/assets/vichama-route.jpg";
+import asperoBannerImg from "@/assets/aspero-banner.jpg";
 
 const RouteSection = () => {
   const routeStops = [
@@ -11,7 +14,7 @@ const RouteSection = () => {
       description: "El centro ceremonial más importante de la civilización Caral",
       duration: "2-3 horas",
       highlights: ["Pirámide Mayor", "Anfiteatro Circular", "Sector Residencial"],
-      image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=400&fit=crop&crop=center"
+      image: caralRouteImg
     },
     {
       id: 2,
@@ -19,7 +22,7 @@ const RouteSection = () => {
       description: "Sitio arqueológico con impresionantes relieves en barro",
       duration: "1-2 horas",
       highlights: ["Relieves Polícromos", "Plaza Ceremonial", "Frisos de Barro"],
-      image: "https://images.unsplash.com/photo-1446329813274-7c9036bd9a1f?w=600&h=400&fit=crop&crop=center"
+      image: vichamaRouteImg
     },
     {
       id: 3,
@@ -27,7 +30,7 @@ const RouteSection = () => {
       description: "Centro pesquero de la Civilización Caral ubicado en la costa",
       duration: "1.5 horas",
       highlights: ["Huaca de los Ídolos", "Huaca de los Sacrificios", "Vista al océano"],
-      image: "https://images.unsplash.com/photo-1533554956664-967b8e2d4447?w=600&h=400&fit=crop&crop=center"
+      image: asperoBannerImg
     }
   ];
 

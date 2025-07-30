@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Globe, Facebook, Youtube, Instagram } from "lucide-react";
-import caralLogo from "@/assets/caral-logo.jpg";
+import caralLogoBanner from "@/assets/caral-logo-banner.png";
+import zacLogo from "@/assets/zac-logo.png";
 import { motion } from "framer-motion";
 
 const Header = () => {
@@ -31,66 +32,78 @@ const Header = () => {
 
   return (
     <motion.header 
-      className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-        isScrolled 
-          ? 'bg-white shadow-elegant border-b border-border' 
-          : 'bg-transparent'
-      }`}
+      className="fixed top-0 w-full z-50"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center space-x-3">
-            <img 
-              src={caralLogo} 
-              alt="Caral Logo" 
-              className="h-10 w-10 object-cover rounded"
-            />
-            <div className="hidden md:block">
-              <h1 className="text-xl font-bold text-primary">CARAL</h1>
-              <p className="text-xs text-muted-foreground">PERÚ</p>
-            </div>
-          </div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-6">
-            {menuItems.map((item) => (
-              <Button 
-                key={item}
-                variant="ghost" 
-                className="text-foreground hover:text-primary hover:bg-caral-sand/20"
-              >
-                {item}
-              </Button>
-            ))}
-          </nav>
-
-          {/* Language & Social Icons */}
-          <div className="flex items-center space-x-3">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setLanguage(language === "ES" ? "EN" : "ES")}
-              className="hidden md:flex items-center space-x-1"
-            >
-              <Globe className="h-4 w-4" />
-              <span>{language}</span>
+      {/* Red Banner */}
+      <div className="bg-red-600 h-12 flex items-center justify-center">
+        <div className="flex items-center space-x-3">
+          <img 
+            src={caralLogoBanner} 
+            alt="Caral Logo" 
+            className="h-8 w-auto object-contain"
+          />
+          <span className="text-white font-bold text-xl tracking-wider">CARAL</span>
+        </div>
+        
+        {/* Language & Portal buttons */}
+        <div className="absolute right-4 flex items-center space-x-2 text-xs text-white">
+          <span>Portal de Transparencia</span>
+          <span>|</span>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setLanguage(language === "ES" ? "EN" : "ES")}
+            className="text-white hover:bg-red-700 h-6 px-2 text-xs"
+          >
+            <Globe className="h-3 w-3 mr-1" />
+            {language}
+          </Button>
+          <div className="flex items-center space-x-1">
+            <Button variant="ghost" size="sm" className="text-white hover:bg-red-700 h-6 w-6 p-0">
+              <Facebook className="h-3 w-3" />
             </Button>
-            
-            <div className="hidden md:flex items-center space-x-2">
-              <Button variant="ghost" size="sm">
-                <Facebook className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="sm">
-                <Youtube className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="sm">
-                <Instagram className="h-4 w-4" />
-              </Button>
+            <Button variant="ghost" size="sm" className="text-white hover:bg-red-700 h-6 w-6 p-0">
+              <Youtube className="h-3 w-3" />
+            </Button>
+            <Button variant="ghost" size="sm" className="text-white hover:bg-red-700 h-6 w-6 p-0">
+              <Instagram className="h-3 w-3" />
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Navigation */}
+      <div className={`transition-all duration-500 ${
+        isScrolled 
+          ? 'bg-white shadow-elegant border-b border-border' 
+          : 'bg-black/20 backdrop-blur-sm'
+      }`}>
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div className="flex items-center space-x-3">
+              <img 
+                src={zacLogo} 
+                alt="ZAC Logo" 
+                className="h-12 w-auto object-contain"
+              />
             </div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-6">
+              {menuItems.map((item) => (
+                <Button 
+                  key={item}
+                  variant="ghost" 
+                  className={`${isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-caral-ochre'} hover:bg-caral-sand/20`}
+                >
+                  {item}
+                </Button>
+              ))}
+            </nav>
 
             {/* Mobile Menu Button */}
             <Button
@@ -99,14 +112,17 @@ const Header = () => {
               className="lg:hidden"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isScrolled ? 
+                (isMenuOpen ? <X className="h-5 w-5 text-foreground" /> : <Menu className="h-5 w-5 text-foreground" />) :
+                (isMenuOpen ? <X className="h-5 w-5 text-white" /> : <Menu className="h-5 w-5 text-white" />)
+              }
             </Button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-border">
+          <div className="lg:hidden py-4 border-t border-border bg-white">
             <nav className="flex flex-col space-y-2">
               {menuItems.map((item) => (
                 <Button 
@@ -117,29 +133,6 @@ const Header = () => {
                   {item}
                 </Button>
               ))}
-              <div className="flex items-center justify-between pt-4 border-t border-border">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setLanguage(language === "ES" ? "EN" : "ES")}
-                  className="flex items-center space-x-1"
-                >
-                  <Globe className="h-4 w-4" />
-                  <span>{language}</span>
-                </Button>
-                
-                <div className="flex items-center space-x-2">
-                  <Button variant="ghost" size="sm">
-                    <Facebook className="h-4 w-4" />
-                  </Button>
-                  <Button variant="ghost" size="sm">
-                    <Youtube className="h-4 w-4" />
-                  </Button>
-                  <Button variant="ghost" size="sm">
-                    <Instagram className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
             </nav>
           </div>
         )}

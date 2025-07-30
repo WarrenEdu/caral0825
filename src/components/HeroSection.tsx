@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { MapPin, Camera } from "lucide-react";
-import caralHero from "@/assets/caral-hero.jpg";
+import vichamaBanner from "@/assets/vichama-banner.jpg";
 import { motion } from "framer-motion";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-fixed" style={{backgroundImage: `url(${caralHero})`}}>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-fixed" style={{backgroundImage: `url(${vichamaBanner})`}}>
       {/* Angular Overlays */}
       <div className="absolute inset-0 angular-overlay">
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />

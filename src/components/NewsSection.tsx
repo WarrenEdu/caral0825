@@ -2,6 +2,8 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import noticiaTesoroImg from "@/assets/noticia-tesoro.png";
+import noticiaFestivalImg from "@/assets/noticia-festival.jpg";
 
 const NewsSection = () => {
   const news = [
@@ -10,7 +12,7 @@ const NewsSection = () => {
       title: "Nuevos Descubrimientos en la Ciudad Sagrada de Caral",
       excerpt: "Arqueólogos han encontrado evidencias de un complejo sistema de canales de riego que revoluciona nuestra comprensión sobre la organización social de Caral.",
       date: "15 de Julio, 2024",
-      image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=400&fit=crop&crop=center",
+      image: noticiaTesoroImg,
       category: "Investigación"
     },
     {
@@ -18,7 +20,7 @@ const NewsSection = () => {
       title: "Festival de la Civilización Caral 2024",
       excerpt: "Se realizará el evento cultural más importante del año, donde se presentarán danzas, música y gastronomía ancestral de la cultura Caral.",
       date: "28 de Julio, 2024",
-      image: "https://images.unsplash.com/photo-1533554956664-967b8e2d4447?w=600&h=400&fit=crop&crop=center",
+      image: noticiaFestivalImg,
       category: "Eventos"
     },
     {

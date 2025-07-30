@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Facebook, Youtube, Instagram, Mail, Phone, MapPin } from "lucide-react";
-import caralLogo from "@/assets/caral-logo.jpg";
+import zacLogo from "@/assets/zac-logo.png";
 
 const Footer = () => {
   const quickLinks = [
@@ -36,16 +36,12 @@ const Footer = () => {
         <div className="grid lg:grid-cols-4 gap-12">
           {/* Brand & Description */}
           <div className="lg:col-span-1">
-            <div className="flex items-center space-x-3 mb-6">
+            <div className="flex items-center justify-start mb-6">
               <img 
-                src={caralLogo} 
-                alt="Caral Logo" 
-                className="h-12 w-12 object-cover rounded"
+                src={zacLogo} 
+                alt="ZAC Logo" 
+                className="h-16 w-auto object-contain"
               />
-              <div>
-                <h3 className="text-2xl font-bold">CARAL</h3>
-                <p className="text-caral-sand text-sm">PERÚ</p>
-              </div>
             </div>
             <p className="text-caral-sand leading-relaxed mb-6">
               La Civilización más antigua de América. Patrimonio Mundial de la Humanidad 
