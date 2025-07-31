@@ -227,4 +227,13 @@ All colors MUST be HSL.
   /* Fixed background for parallax effect */
   --bg-fixed: fixed;
   --bg-parallax: scroll;
+
+  /* Angular cut image effect */
+  .angular-cut {
+    clip-path: polygon(0 0, calc(100% - 40px) 0, 100% 40px, 100% 100%, 0 100%);
+  }
+
+  .angular-cut-large {
+    clip-path: polygon(0 0, calc(100% - 60px) 0, 100% 60px, 100% 100%, 0 100%);
+  }
 }

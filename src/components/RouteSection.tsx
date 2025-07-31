@@ -108,7 +108,7 @@ const RouteSection = () => {
                   <img 
                     src={stop.image} 
                     alt={stop.name}
-                    className="w-full h-64 lg:h-full object-cover hover-scale-smooth"
+                    className="w-full h-64 lg:h-full object-cover hover-scale-smooth angular-cut-large"
                   />
                 </div>
                 <div className="p-8 lg:p-12 flex flex-col justify-center">

@@ -70,7 +70,7 @@ const NewsSection = () => {
               <Card className="group card-hover-line shadow-card hover:shadow-elegant transition-all duration-500 border-0 overflow-hidden">
                 <div className="relative overflow-hidden">
                   {(article as any).isVideo ? (
-                    <div className="h-48">
+                    <div className="h-48 angular-cut">
                       <YouTubeVideo 
                         videoId={(article as any).videoId}
                         title={article.title}
@@ -81,7 +81,7 @@ const NewsSection = () => {
                     <img 
                       src={article.image} 
                       alt={article.title}
-                      className="w-full h-48 object-cover hover-scale-smooth"
+                      className="w-full h-48 object-cover hover-scale-smooth angular-cut"
                     />
                   )}
                   <div className="absolute top-4 left-4 z-10">
