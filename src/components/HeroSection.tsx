@@ -65,15 +65,14 @@ const HeroSection = () => {
           >
             <Button 
               size="lg"
-              className="bg-caral-ochre hover:bg-caral-terracotta text-white font-semibold px-8 py-4 text-lg shadow-elegant"
+              className="bg-white/20 backdrop-blur-sm border border-white/30 text-white hover:bg-[rgb(180,24,35)] hover:border-[rgb(180,24,35)] font-semibold px-8 py-4 text-lg shadow-elegant transition-all duration-300"
             >
               <MapPin className="mr-2 h-5 w-5" />
               Ruta Caral
             </Button>
             <Button 
-              variant="outline"
               size="lg"
-              className="border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-8 py-4 text-lg"
+              className="bg-white/20 backdrop-blur-sm border border-white/30 text-white hover:bg-[rgb(180,24,35)] hover:border-[rgb(180,24,35)] font-semibold px-8 py-4 text-lg shadow-elegant transition-all duration-300"
             >
               <Camera className="mr-2 h-5 w-5" />
               Museo Caral

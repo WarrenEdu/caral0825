@@ -142,14 +142,7 @@ const Header = () => {
                 >
                   <Button 
                     variant="ghost" 
-                    className={`
-                      ${
-                        menuItem.title === "Ruta Caral" || menuItem.title === "Museo Caral" 
-                          ? `bg-white/20 hover:bg-[rgb(180,24,35)] ${isScrolled ? 'text-foreground' : 'text-white'} hover:text-white`
-                          : `${isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-caral-ochre'} hover:bg-caral-sand/20`
-                      } 
-                      flex items-center gap-1`
-                    }
+                    className={`${isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-caral-ochre'} hover:bg-caral-sand/20 flex items-center gap-1`}
                   >
                     {menuItem.title}
                     {menuItem.items.length > 0 && (
