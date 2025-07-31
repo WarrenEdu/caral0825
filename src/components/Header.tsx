@@ -11,6 +11,7 @@ const Header = () => {
   const [language, setLanguage] = useState("ES");
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [openMobileSubmenu, setOpenMobileSubmenu] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,7 +65,7 @@ const Header = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       {/* Red Banner */}
-      <div className="bg-red-600 h-12 flex items-center justify-center">
+      <div className="bg-[rgb(180,24,35)] h-12 flex items-center justify-center relative">
         <div className="flex items-center">
           <img 
             src={caralLogoBanner} 
@@ -78,9 +79,9 @@ const Header = () => {
           <img 
             src={transparenciaLogo} 
             alt="Portal de Transparencia" 
-            className="h-6 w-auto object-contain"
+            className="h-6 w-auto object-contain hidden lg:block"
           />
-          <span>|</span>
+          <span className="hidden lg:block">|</span>
           <Button
             variant="ghost"
             size="sm"
@@ -101,6 +102,15 @@ const Header = () => {
               <Instagram className="h-3 w-3" />
             </Button>
           </div>
+        </div>
+        
+        {/* Mobile Transparency Logo */}
+        <div className="lg:hidden absolute right-4 top-14">
+          <img 
+            src={transparenciaLogo} 
+            alt="Portal de Transparencia" 
+            className="h-4 w-auto object-contain"
+          />
         </div>
       </div>
 
@@ -132,7 +142,14 @@ const Header = () => {
                 >
                   <Button 
                     variant="ghost" 
-                    className={`${isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-caral-ochre'} hover:bg-caral-sand/20 flex items-center gap-1`}
+                    className={`
+                      ${
+                        menuItem.title === "Ruta Caral" || menuItem.title === "Museo Caral" 
+                          ? `bg-white/20 hover:bg-[rgb(180,24,35)] ${isScrolled ? 'text-foreground' : 'text-white'} hover:text-white`
+                          : `${isScrolled ? 'text-foreground hover:text-primary' : 'text-white hover:text-caral-ochre'} hover:bg-caral-sand/20`
+                      } 
+                      flex items-center gap-1`
+                    }
                   >
                     {menuItem.title}
                     {menuItem.items.length > 0 && (
@@ -142,7 +159,11 @@ const Header = () => {
                   
                   {/* Dropdown Menu */}
                   {menuItem.items.length > 0 && activeDropdown === menuItem.title && (
-                    <div className="absolute top-full left-0 mt-1 w-64 bg-black/90 backdrop-blur-sm rounded-lg shadow-lg border border-white/10 p-4 z-50">
+                    <div 
+                      className="absolute top-full left-0 mt-1 w-64 bg-black/90 backdrop-blur-sm rounded-lg shadow-lg border border-white/10 p-4 z-50"
+                      onMouseEnter={() => setActiveDropdown(menuItem.title)}
+                      onMouseLeave={() => setActiveDropdown(null)}
+                    >
                       <div className="space-y-2">
                         {menuItem.items.map((subItem) => (
                           <a
@@ -184,11 +205,24 @@ const Header = () => {
                   <Button 
                     variant="ghost" 
                     className="justify-start text-foreground hover:text-primary hover:bg-caral-sand/20 w-full"
+                    onClick={() => {
+                      if (menuItem.items.length > 0) {
+                        setOpenMobileSubmenu(
+                          openMobileSubmenu === menuItem.title ? null : menuItem.title
+                        );
+                      }
+                    }}
                   >
                     {menuItem.title}
-                    {menuItem.items.length > 0 && <ChevronDown className="ml-auto h-4 w-4" />}
+                    {menuItem.items.length > 0 && (
+                      <ChevronDown 
+                        className={`ml-auto h-4 w-4 transition-transform ${
+                          openMobileSubmenu === menuItem.title ? 'rotate-180' : ''
+                        }`} 
+                      />
+                    )}
                   </Button>
-                  {menuItem.items.length > 0 && (
+                  {menuItem.items.length > 0 && openMobileSubmenu === menuItem.title && (
                     <div className="ml-4 mt-2 space-y-1">
                       {menuItem.items.map((subItem) => (
                         <Button

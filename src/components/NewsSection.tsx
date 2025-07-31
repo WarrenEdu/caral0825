@@ -4,6 +4,7 @@ import { Calendar, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import noticiaTesoroImg from "@/assets/noticia-tesoro.png";
 import noticiaFestivalImg from "@/assets/noticia-festival.jpg";
+import YouTubeVideo from "@/components/YouTubeVideo";
 
 const NewsSection = () => {
   const news = [
@@ -28,8 +29,10 @@ const NewsSection = () => {
       title: "Caral: Patrimonio Mundial de la Humanidad",
       excerpt: "Conmemoramos 15 años desde que la UNESCO declaró a Caral como Patrimonio Mundial, reconociendo su valor universal excepcional.",
       date: "28 de Junio, 2024",
-      image: "https://images.unsplash.com/photo-1446329813274-7c9036bd9a1f?w=600&h=400&fit=crop&crop=center",
-      category: "Patrimonio"
+      image: "",
+      category: "Patrimonio",
+      isVideo: true,
+      videoId: "PlFSHmGoMbY"
     }
   ];
 
@@ -66,12 +69,22 @@ const NewsSection = () => {
             >
               <Card className="group card-hover-line shadow-card hover:shadow-elegant transition-all duration-500 border-0 overflow-hidden">
                 <div className="relative overflow-hidden">
-                  <img 
-                    src={article.image} 
-                    alt={article.title}
-                    className="w-full h-48 object-cover hover-scale-smooth"
-                  />
-                  <div className="absolute top-4 left-4">
+                  {(article as any).isVideo ? (
+                    <div className="h-48">
+                      <YouTubeVideo 
+                        videoId={(article as any).videoId}
+                        title={article.title}
+                        className="h-full"
+                      />
+                    </div>
+                  ) : (
+                    <img 
+                      src={article.image} 
+                      alt={article.title}
+                      className="w-full h-48 object-cover hover-scale-smooth"
+                    />
+                  )}
+                  <div className="absolute top-4 left-4 z-10">
                     <span className="bg-caral-ochre text-white px-3 py-1 rounded-full text-sm font-medium">
                       {article.category}
                     </span>
