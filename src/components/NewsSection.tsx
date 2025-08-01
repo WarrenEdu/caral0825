@@ -1,4 +1,4 @@
-import { Card } from "@/components/ui/card"; // Solo necesitamos Card, CardContent se puede reemplazar con un div
+import { Card } from "@/components/ui/card"; // Solo necesitamos Card
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -79,16 +79,8 @@ const NewsSection = () => {
                 </div>
                 
                 {/* Contenedor del texto - Se mueve hacia arriba al hacer hover en el 'group' padre */}
-                {/* Usamos motion.div para la animación y group-hover para la detección */}
                 <motion.div
-                  className="p-6 pt-4 bg-white transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-20" /* Aumenté el translate para que tape más */
-                  // También puedes usar variants si prefieres, pero group-hover es más directo aquí
-                  // variants={{
-                  //   initial: { y: 0 },
-                  //   hover: { y: -60 } 
-                  // }}
-                  // initial="initial"
-                  // whileHover="hover" // Esto se activaría si motion.div fuera el que detecta el hover
+                  className="p-6 pt-4 bg-white transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-20" /* Ajusta -translate-y-XX para el recorte deseado */
                 >
                   <h3 className="text-xl font-semibold mb-2">
                     {article.title}
