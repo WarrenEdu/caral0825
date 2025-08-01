@@ -140,8 +140,8 @@ const Header = () => {
       >
         <div className="flex items-center justify-between h-20">
           {/* Desktop Navigation - Left Side */}
-          <nav className="hidden lg:flex flex-1 justify-end items-center pr-8">
-            <div className="flex gap-x-12">
+          <nav className="hidden lg:flex flex-1 justify-end items-center pr-6"> {/* Ajustado pr de 8 a 6 */}
+            <div className="flex gap-x-10"> {/* Ajustado gap-x de 12 a 10 */}
               {leftMenuItems.map((menuItem) => (
                 <div 
                   key={menuItem.title} 
@@ -150,7 +150,7 @@ const Header = () => {
                 >
                   <a 
                     href={menuItem.href} 
-                    className={`flex items-center gap-1 text-white text-sm font-semibold hover:text-gray-300 transition-colors whitespace-nowrap`} {/* Añadido 'whitespace-nowrap' */}
+                    className={`flex items-center gap-1 text-white text-[13px] font-semibold hover:text-gray-300 transition-colors whitespace-nowrap`} {/* text-sm (14px) cambiado a text-[13px] */}
                   >
                     {menuItem.title}
                     {menuItem.subItems.length > 0 && (
@@ -163,7 +163,7 @@ const Header = () => {
           </nav>
 
           {/* Logo Central (para desktop) */}
-          <div className="hidden lg:flex items-center mx-16">
+          <div className="hidden lg:flex items-center mx-12"> {/* Ajustado mx de 16 a 12 */}
             <img 
               src={caralLogoBanner} 
               alt="Caral Logo" 
@@ -172,8 +172,8 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation - Right Side */}
-          <nav className="hidden lg:flex flex-1 justify-start items-center pl-8">
-            <div className="flex gap-x-12">
+          <nav className="hidden lg:flex flex-1 justify-start items-center pl-6"> {/* Ajustado pl de 8 a 6 */}
+            <div className="flex gap-x-10"> {/* Ajustado gap-x de 12 a 10 */}
               {rightMenuItems.map((menuItem) => (
                 <div 
                   key={menuItem.title} 
@@ -182,7 +182,7 @@ const Header = () => {
                 >
                   <a 
                     href={menuItem.href} 
-                    className={`flex items-center gap-1 text-white text-sm font-semibold hover:text-gray-300 transition-colors whitespace-nowrap`} {/* Añadido 'whitespace-nowrap' */}
+                    className={`flex items-center gap-1 text-white text-[13px] font-semibold hover:text-gray-300 transition-colors whitespace-nowrap`} {/* text-sm (14px) cambiado a text-[13px] */}
                   >
                     {menuItem.title}
                     {menuItem.subItems.length > 0 && (
