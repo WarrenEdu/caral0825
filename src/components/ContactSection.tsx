@@ -30,22 +30,22 @@ const NewsletterSection = () => {
               <Input 
                 type="email" 
                 placeholder="Email Address" 
-                className="h-12 border-none border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
+                className="h-12 border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
               />
               <Input 
                 type="text" 
                 placeholder="First Name" 
-                className="h-12 border-none border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
+                className="h-12 border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
               />
               <Input 
                 type="text" 
                 placeholder="Last Name" 
-                className="h-12 border-none border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
+                className="h-12 border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
               />
               <Input 
                 type="text" 
                 placeholder="Zip Code" 
-                className="h-12 border-none border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
+                className="h-12 border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
               />
             </div>
             <Button 
