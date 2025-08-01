@@ -1,12 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
-// Asume que tienes estas imágenes en tus assets. Reemplaza las rutas.
-import museumMainImage from "@/assets/presidential-funerals.png"; // La imagen principal del centro
-import awardLogo1 from "@/assets/award-30th.png"; // Primer logo de premio
-import awardLogo2 from "@/assets/award-best-houston-2021.png"; // Segundo logo de premio
-import awardLogo3 from "@/assets/award-best-houston-winner.png"; // Tercer logo de premio
-
+// Importa solo la imagen central con la URL proporcionada
+const museumMainImage = "https://nesweip.com/boceto_larco/imagenes/PERSONAL_Lima.jpg"; 
 
 const AboutSection = () => {
   return (
@@ -54,13 +50,12 @@ const AboutSection = () => {
               The National Museum of Funeral History is an educational experience like no other and offers something for everyone. Discover America's largest collection of authentic, historical funeral service items.
             </p>
             
-            {/* Logos/Premios */}
+            {/* Texto de logos/premios (ya no se renderizan las imágenes) */}
             <div className="mt-6 space-y-4">
-              <p className="text-xs font-semibold text-gray-500">NATIONAL MUSEUM OF FUNERAL HISTORY</p> {/* Texto superior de logos */}
+              <p className="text-xs font-semibold text-gray-500">NATIONAL MUSEUM OF FUNERAL HISTORY</p> 
+              {/* Aquí es donde irían los logos de premios si los tuvieras, ahora es solo un placeholder de texto */}
               <div className="flex items-center space-x-4">
-                <img src={awardLogo1} alt="30th Anniversary Award" className="h-20 w-auto object-contain" /> {/* Ajusta h-auto y w-auto para mantener proporción */}
-                <img src={awardLogo2} alt="Best Houston 2021 Award" className="h-20 w-auto object-contain" />
-                <img src={awardLogo3} alt="Best Houston Winner Award" className="h-20 w-auto object-contain" />
+                <p className="text-xs text-gray-500 italic">Aquí irían los logos de premios</p> {/* Placeholder de texto */}
               </div>
             </div>
           </motion.div>
@@ -76,7 +71,7 @@ const AboutSection = () => {
             <div className="bg-white p-4 shadow-lg border border-gray-200"> {/* Contenedor para el "frame" blanco alrededor de la imagen */}
               <h3 className="text-center text-lg font-semibold mb-2 text-gray-700">PRESIDENTIAL FUNERALS</h3>
               <img 
-                src={museumMainImage} 
+                src={museumMainImage} // Usa la URL directa
                 alt="Presidential Funerals Exhibit" 
                 className="w-full h-auto object-cover max-h-[400px]" // Ajusta el tamaño de la imagen
               />
@@ -94,7 +89,6 @@ const AboutSection = () => {
             <p>
               Learn about caskets and coffins, hearses through history, plus the funerals of Presidents, Popes, celebrities and more while you witness the cultural heritage of the funeral service industry and its time-honored tradition of compassion.
             </p>
-            {/* El botón se mueve fuera de esta columna para alinearse al final */}
           </motion.div>
 
         </div>
