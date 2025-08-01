@@ -1,8 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { motion, useAnimation } from "framer-motion"; // Importamos useAnimation
-import { useEffect } from "react"; // Necesario para useAnimation
+import { motion } from "framer-motion";
 
 const NewsSection = () => {
   const news = [
@@ -71,18 +70,6 @@ const NewsSection = () => {
 
 // Componente individual para cada tarjeta de noticias
 const NewsCard = ({ article, index }) => {
-  const textControls = useAnimation(); // Inicializamos los controles para el texto
-
-  // Función para iniciar la animación al hacer hover
-  const handleHoverStart = () => {
-    textControls.start({ y: -60, transition: { duration: 0.3 } }); // Ajusta -60 para el recorte deseado
-  };
-
-  // Función para revertir la animación al quitar el hover
-  const handleHoverEnd = () => {
-    textControls.start({ y: 0, transition: { duration: 0.3 } });
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -90,13 +77,14 @@ const NewsCard = ({ article, index }) => {
       transition={{ duration: 0.6, delay: index * 0.1 }}
       viewport={{ once: true }}
     >
-      {/* La Card principal detecta el hover */}
-      <Card 
-        className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col h-full" // h-full para que todas las tarjetas tengan la misma altura en el grid
-        onHoverStart={handleHoverStart} // Detecta el inicio del hover en toda la tarjeta
-        onHoverEnd={handleHoverEnd}     // Detecta el fin del hover en toda la tarjeta
+      {/* La Card principal ahora es un motion.div y detecta el hover */}
+      {/* Se le asigna una altura fija para que todas las tarjetas sean del mismo tamaño */}
+      <motion.div
+        className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col h-[350px]" // Altura fija para la tarjeta
+        whileHover={{ y: -30 }} // Toda la tarjeta se mueve 30px hacia arriba al hacer hover
+        transition={{ duration: 0.3, ease: "easeOut" }} // Animación suave
       >
-        {/* Contenedor de la imagen - altura fija */}
+        {/* Contenedor de la imagen - altura fija, contenido no se mueve */}
         <div className="h-48 relative overflow-hidden">
           <img 
             src={article.image} 
@@ -105,20 +93,16 @@ const NewsCard = ({ article, index }) => {
           />
         </div>
         
-        {/* Contenedor del texto - Controlado por useAnimation */}
-        <motion.div
-          className="p-6 pt-4 bg-white"
-          animate={textControls} // Vinculamos el div a los controles de animación
-          initial={{ y: 0 }}    // Estado inicial del texto (debajo de la imagen)
-        >
+        {/* Contenedor del texto - Se mueve junto con la tarjeta, tiene fondo blanco para "cubrir" */}
+        <div className="p-6 pt-4 bg-white flex-grow flex flex-col justify-end"> {/* flex-grow para que ocupe el espacio restante */}
           <h3 className="text-xl font-semibold mb-2">
             {article.title}
           </h3>
           <p className="text-sm text-gray-600 leading-relaxed">
             {article.excerpt}
           </p>
-        </motion.div>
-      </Card>
+        </div>
+      </motion.div>
     </motion.div>
   );
 };
