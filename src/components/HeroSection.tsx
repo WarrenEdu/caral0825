@@ -24,7 +24,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}   // Anima a visible y posición original
             transition={{ duration: 1, ease: "easeOut" }} // Duración de 1 segundo, con un suavizado
           >
-            Navigate our map collection.
+            CARAL PERÚ
           </motion.h1>
           
           {/* Animación para el botón */}
@@ -37,7 +37,7 @@ const HeroSection = () => {
               size="lg"
               className="px-8 py-4 text-lg border-2 border-white text-white bg-transparent uppercase hover:bg-white hover:text-black transition-colors duration-300"
             >
-              EXPLORE MAP LIBRARY
+              LA CIVILIZACIÓN MÁS ANTIGUA DE AMÉRICA
             </Button>
           </motion.div>
         </div>
