@@ -105,7 +105,7 @@ const AboutSection = () => {
             size="lg"
             className="bg-stone-200 hover:bg-stone-300 text-gray-700 font-semibold px-8 py-4 rounded-none uppercase tracking-wide text-sm"
           >
-            Tickets to the Museum
+            MAS INFORMACION
           </Button>
         </motion.div>
 
