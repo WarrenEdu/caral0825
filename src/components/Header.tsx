@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ArrowRight } from "lucide-react"; // Importar ArrowRight para el botón "BUY TICKETS"
+import { Menu, X, ArrowRight } from "lucide-react";
 import tampaBayHistoryCenterLogo from "@/assets/caral-logo-banner.png"; // Asumo que este es el logo correcto
 import { motion } from "framer-motion";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false); // Nuevo estado para controlar la visibilidad del dropdown
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false); // Estado para controlar la visibilidad del dropdown
+
+  // Definir el color rojo del banner/dropdown
+  const RED_COLOR_CLASS = "bg-[rgb(180,24,35)]";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,9 +76,9 @@ const Header = () => {
   return (
     <motion.header 
       className={`fixed top-0 w-full z-50 transition-all duration-300 font-barlow ${
-        isScrolled
-          ? 'bg-black bg-opacity-70 shadow-lg'
-          : 'bg-transparent'
+        isScrolled || isDropdownVisible // <-- Aplicar color rojo si hay scroll O si el dropdown está visible
+          ? RED_COLOR_CLASS + ' shadow-lg' // Fondo rojo y sombra
+          : 'bg-transparent' // Fondo transparente por defecto
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -102,11 +105,11 @@ const Header = () => {
               {menuItems.slice(0, 3).map((item) => (
                 <div 
                   key={item.title} 
-                  onMouseEnter={() => setIsDropdownVisible(true)} // Mostrar dropdown al pasar mouse
+                  onMouseEnter={() => setIsDropdownVisible(true)} // Mostrar dropdown y pintar header
                 >
                   <a 
                     href={item.href} 
-                    className={`text-white text-sm uppercase font-semibold hover:text-gray-300 transition-colors ${isScrolled ? 'text-white' : 'text-white'}`}
+                    className={`text-white text-sm uppercase font-semibold hover:text-gray-300 transition-colors`}
                   >
                     {item.title}
                   </a>
@@ -119,11 +122,11 @@ const Header = () => {
               {menuItems.slice(3, -1).map((item) => (
                 <div 
                   key={item.title} 
-                  onMouseEnter={() => setIsDropdownVisible(true)} // Mostrar dropdown al pasar mouse
+                  onMouseEnter={() => setIsDropdownVisible(true)} // Mostrar dropdown y pintar header
                 >
                   <a 
                     href={item.href} 
-                    className={`text-white text-sm uppercase font-semibold hover:text-gray-300 transition-colors ${isScrolled ? 'text-white' : 'text-white'}`}
+                    className={`text-white text-sm uppercase font-semibold hover:text-gray-300 transition-colors`}
                   >
                     {item.title}
                   </a>
@@ -145,8 +148,8 @@ const Header = () => {
           {/* Enlace 'SUPPORT' en desktop (siempre a la derecha) */}
           <a 
             href={menuItems.find(item => item.title === "SUPPORT")?.href} 
-            className={`hidden lg:block text-white text-sm uppercase font-semibold hover:text-gray-300 transition-colors ml-auto pl-8 ${isScrolled ? 'text-white' : 'text-white'}`}
-            onMouseEnter={() => setIsDropdownVisible(true)} // Mostrar dropdown
+            className={`hidden lg:block text-white text-sm uppercase font-semibold hover:text-gray-300 transition-colors ml-auto pl-8`}
+            onMouseEnter={() => setIsDropdownVisible(true)} // Mostrar dropdown y pintar header
           >
             SUPPORT
           </a>
@@ -156,7 +159,7 @@ const Header = () => {
       {/* Dropdown Menu (visible solo en desktop y cuando isDropdownVisible es true) */}
       {isDropdownVisible && (
         <motion.div
-          className="absolute top-full left-0 right-0 bg-[rgb(180,24,35)] z-40 py-8 shadow-xl border-t border-gray-700 hidden lg:block"
+          className={`absolute top-full left-0 right-0 ${RED_COLOR_CLASS} z-40 py-8 shadow-xl border-t border-gray-700 hidden lg:block`}
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
