@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown, ArrowRight } from "lucide-react"; // Añadimos ChevronDown y ArrowRight
-import caralLogoBanner from "@/assets/caral-logo-banner.png"; // Usamos caralLogoBanner para este menú
+import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
+import caralLogoBanner from "@/assets/caral-logo-banner.png"; 
 import { motion } from "framer-motion";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null); // Estado para controlar qué dropdown está abierto
+  const [activeDropdown, setActiveDropdown] = useState(null);
 
-  // Definir el color rojo del banner/dropdown (rgb(180, 24, 35))
   const RED_COLOR_CLASS = "bg-[rgb(180,24,35)]";
 
   useEffect(() => {
@@ -56,7 +55,7 @@ const Header = () => {
       title: "Tienda Caral", 
       href: "#", 
       subItems: [] 
-    }, // No tiene submenú
+    },
     { 
       title: "Estadísticas", 
       href: "#", 
@@ -67,16 +66,25 @@ const Header = () => {
   const leftMenuItems = allMenuItems.slice(0, 4);
   const rightMenuItems = allMenuItems.slice(4);
 
-  // Contenido dinámico para los dropdowns basado en los subItems
   const renderDropdownContent = (subItems) => {
-    const half = Math.ceil(subItems.length / 2);
-    const firstColumn = subItems.slice(0, half);
-    const secondColumn = subItems.slice(half);
+    // Determine how to split subItems into two columns for better distribution
+    // If there are 4 or fewer, keep them in one column for simplicity and alignment.
+    // If more than 4, split into two columns.
+    let firstColumn = [];
+    let secondColumn = [];
+
+    if (subItems.length <= 4) {
+      firstColumn = subItems;
+    } else {
+      const half = Math.ceil(subItems.length / 2);
+      firstColumn = subItems.slice(0, half);
+      secondColumn = subItems.slice(half);
+    }
 
     return (
-      <div className="flex flex-col md:flex-row p-8 w-full max-w-7xl mx-auto">
+      <div className="flex flex-col md:flex-row py-8 px-12 w-full max-w-7xl mx-auto"> {/* Adjusted padding */}
         {/* Sección Izquierda: Subtítulos dinámicos */}
-        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 pr-8 mb-8 md:mb-0">
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-4 pr-12 mb-8 md:mb-0"> {/* Increased gap-x, adjusted pr */}
           {/* Columna 1 de subtítulos */}
           <div>
             <h3 className="text-white text-lg font-semibold mb-4 border-b border-dashed border-white/50 pb-2">Contenido</h3>
@@ -86,10 +94,10 @@ const Header = () => {
               ))}
             </ul>
           </div>
-          {/* Columna 2 de subtítulos (solo si hay suficientes elementos) */}
+          {/* Columna 2 de subtítulos (solo si hay suficientes elementos para una segunda columna) */}
           {secondColumn.length > 0 && (
             <div>
-              <h3 className="text-white text-lg font-semibold mb-4 border-b border-dashed border-white/50 pb-2"></h3> {/* Título vacío o genérico */}
+              <h3 className="text-white text-lg font-semibold mb-4 border-b border-dashed border-white/50 pb-2 hidden md:block"></h3> {/* Empty title, hidden on mobile */}
               <ul className="space-y-2">
                 {secondColumn.map((item) => (
                   <li key={item}><a href="#" className="text-gray-200 hover:text-white transition-colors">{item}</a></li>
@@ -100,10 +108,13 @@ const Header = () => {
         </div>
 
         {/* Separador Vertical (visible en desktop) */}
-        <div className="hidden md:block w-px bg-white/50 border-l border-dashed border-white/50 my-auto h-auto min-h-[200px]"></div>
+        {/* Usamos un div separado para la línea punteada para mejor control del estilo y alineación */}
+        <div className="hidden md:flex justify-center items-center px-6"> 
+          <div className="h-full w-px border-l-2 border-dashed border-white/50"></div>
+        </div>
 
         {/* Sección Derecha: Experience historic Florida. (Fija) */}
-        <div className="flex-1 pl-8 flex flex-col justify-center items-start text-left">
+        <div className="flex-1 pl-12 flex flex-col justify-center items-start text-left"> {/* Adjusted pl */}
           <h2 className="text-white text-4xl md:text-5xl font-bold mb-6 leading-tight">
             Experience historic <br /> Florida.
           </h2>
@@ -121,7 +132,7 @@ const Header = () => {
   return (
     <motion.header 
       className={`fixed top-0 w-full z-50 transition-all duration-300 font-barlow ${
-        isScrolled || activeDropdown // Fondo rojo si hay scroll O si algún dropdown está abierto
+        isScrolled || activeDropdown 
           ? RED_COLOR_CLASS + ' shadow-lg' 
           : 'bg-transparent'
       }`}
@@ -131,12 +142,12 @@ const Header = () => {
     >
       <div 
         className="container mx-auto px-4"
-        onMouseLeave={() => setActiveDropdown(null)} // Cerrar cualquier dropdown al salir del área del header
+        onMouseLeave={() => setActiveDropdown(null)} 
       >
         <div className="flex items-center justify-between h-20">
           {/* Desktop Navigation - Left Side */}
-          <nav className="hidden lg:flex flex-1 justify-end items-center px-4"> {/* justify-end para empujar a la izquierda */}
-            <div className="flex gap-x-8">
+          <nav className="hidden lg:flex flex-1 justify-end items-center px-4">
+            <div className="flex gap-x-12"> {/* Increased gap-x for more space */}
               {leftMenuItems.map((menuItem) => (
                 <div 
                   key={menuItem.title} 
@@ -167,8 +178,8 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation - Right Side */}
-          <nav className="hidden lg:flex flex-1 justify-start items-center px-4"> {/* justify-start para empujar a la derecha */}
-            <div className="flex gap-x-8">
+          <nav className="hidden lg:flex flex-1 justify-start items-center px-4">
+            <div className="flex gap-x-12"> {/* Increased gap-x for more space */}
               {rightMenuItems.map((menuItem) => (
                 <div 
                   key={menuItem.title} 
@@ -201,10 +212,10 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Dropdown Menu (visible solo en desktop y cuando activeDropdown es true) */}
+      {/* Dropdown Menu (visible solo en desktop y cuando activeDropdown es true y tiene subItems) */}
       {activeDropdown && allMenuItems.find(item => item.title === activeDropdown)?.subItems.length > 0 && (
         <motion.div
-          className={`absolute top-full left-0 right-0 ${RED_COLOR_CLASS} z-40 py-8 shadow-xl border-t border-gray-700 hidden lg:block`}
+          className={`absolute top-full left-0 right-0 ${RED_COLOR_CLASS} z-40 shadow-xl border-t border-gray-700 hidden lg:block`} {/* Removed py-8 from here, moved to renderDropdownContent */}
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
@@ -237,7 +248,7 @@ const Header = () => {
                         <a 
                           href="#" 
                           className="block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded-md transition-colors"
-                          onClick={() => setIsMenuOpen(false)} // Cerrar menú móvil al seleccionar un subitem
+                          onClick={() => setIsMenuOpen(false)}
                         >
                           {subItem}
                         </a>
