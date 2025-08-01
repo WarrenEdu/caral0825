@@ -139,9 +139,18 @@ const Header = () => {
         onMouseLeave={() => setActiveDropdown(null)} 
       >
         <div className="flex items-center justify-between h-20">
+          {/* Logo para Mobile (visible solo en mobile, a la izquierda) */}
+          <div className="lg:hidden flex items-center">
+            <img 
+              src={caralLogoBanner} 
+              alt="Caral Logo" 
+              className="h-12 w-auto object-contain" // Ajustado tamaño para mobile
+            />
+          </div>
+
           {/* Desktop Navigation - Left Side */}
-          <nav className="hidden lg:flex flex-1 justify-end items-center pr-6"> {/* Ajustado pr de 8 a 6 */}
-            <div className="flex gap-x-10"> {/* Ajustado gap-x de 12 a 10 */}
+          <nav className="hidden lg:flex flex-1 justify-end items-center pr-6">
+            <div className="flex gap-x-8"> {/* Ajustado gap-x de 10 a 8 para más espacio */}
               {leftMenuItems.map((menuItem) => (
                 <div 
                   key={menuItem.title} 
@@ -150,7 +159,7 @@ const Header = () => {
                 >
                   <a 
                     href={menuItem.href} 
-                    className={`flex items-center gap-1 text-white text-[13px] font-semibold hover:text-gray-300 transition-colors whitespace-nowrap`} {/* text-sm (14px) cambiado a text-[13px] */}
+                    className={`flex items-center gap-1 text-white text-[12px] font-semibold hover:text-gray-300 transition-colors whitespace-nowrap`} {/* text-[13px] cambiado a text-[12px] */}
                   >
                     {menuItem.title}
                     {menuItem.subItems.length > 0 && (
@@ -163,7 +172,7 @@ const Header = () => {
           </nav>
 
           {/* Logo Central (para desktop) */}
-          <div className="hidden lg:flex items-center mx-12"> {/* Ajustado mx de 16 a 12 */}
+          <div className="hidden lg:flex items-center mx-10"> {/* Ajustado mx de 12 a 10 */}
             <img 
               src={caralLogoBanner} 
               alt="Caral Logo" 
@@ -172,8 +181,8 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation - Right Side */}
-          <nav className="hidden lg:flex flex-1 justify-start items-center pl-6"> {/* Ajustado pl de 8 a 6 */}
-            <div className="flex gap-x-10"> {/* Ajustado gap-x de 12 a 10 */}
+          <nav className="hidden lg:flex flex-1 justify-start items-center pl-6">
+            <div className="flex gap-x-8"> {/* Ajustado gap-x de 10 a 8 para más espacio */}
               {rightMenuItems.map((menuItem) => (
                 <div 
                   key={menuItem.title} 
@@ -182,7 +191,7 @@ const Header = () => {
                 >
                   <a 
                     href={menuItem.href} 
-                    className={`flex items-center gap-1 text-white text-[13px] font-semibold hover:text-gray-300 transition-colors whitespace-nowrap`} {/* text-sm (14px) cambiado a text-[13px] */}
+                    className={`flex items-center gap-1 text-white text-[12px] font-semibold hover:text-gray-300 transition-colors whitespace-nowrap`} {/* text-[13px] cambiado a text-[12px] */}
                   >
                     {menuItem.title}
                     {menuItem.subItems.length > 0 && (
@@ -194,11 +203,11 @@ const Header = () => {
             </div>
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button (a la derecha) */}
           <Button
             variant="ghost"
             size="sm"
-            className="lg:hidden text-white ml-auto"
+            className="lg:hidden text-white ml-auto" // ml-auto lo empuja a la derecha
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -206,7 +215,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Dropdown Menu (visible solo en desktop y cuando activeDropdown es true y tiene subItems) */}
+      {/* Dropdown Menu (visible solo en desktop) */}
       {activeDropdown && allMenuItems.find(item => item.title === activeDropdown)?.subItems.length > 0 && (
         <motion.div
           className={`absolute top-full left-0 right-0 ${RED_COLOR_CLASS} z-40 shadow-xl border-t border-gray-700 hidden lg:block`}
@@ -219,15 +228,21 @@ const Header = () => {
         </motion.div>
       )}
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation (con efecto y color) */}
       {isMenuOpen && (
-        <div className="lg:hidden py-4 border-t border-gray-700 bg-black bg-opacity-90">
+        <motion.div
+          className={`lg:hidden py-4 border-t border-gray-700 ${RED_COLOR_CLASS} shadow-lg`} {/* Aplicado RED_COLOR_CLASS */}
+          initial={{ opacity: 0, y: -20 }} // Inicia un poco arriba y transparente
+          animate={{ opacity: 1, y: 0 }}   // Se desliza hacia abajo y aparece
+          exit={{ opacity: 0, y: -20 }}    // Efecto al salir
+          transition={{ duration: 0.3, ease: "easeOut" }}
+        >
           <nav className="flex flex-col space-y-2 px-4">
             {allMenuItems.map((menuItem) => (
               <div key={menuItem.title}>
                 <Button 
                   variant="ghost" 
-                  className="justify-start text-white hover:bg-gray-700 w-full"
+                  className="justify-start text-white hover:bg-white/10 w-full" // Ajustado hover para el nuevo fondo
                   onClick={() => setActiveDropdown(activeDropdown === menuItem.title ? null : menuItem.title)}
                 >
                   {menuItem.title}
@@ -241,7 +256,7 @@ const Header = () => {
                       <li key={subItem}>
                         <a 
                           href="#" 
-                          className="block px-3 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded-md transition-colors"
+                          className="block px-3 py-2 text-sm text-gray-200 hover:text-white hover:bg-white/10 rounded-md transition-colors" // Ajustado hover
                           onClick={() => setIsMenuOpen(false)}
                         >
                           {subItem}
@@ -253,7 +268,7 @@ const Header = () => {
               </div>
             ))}
           </nav>
-        </div>
+        </motion.div>
       )}
     </motion.header>
   );
