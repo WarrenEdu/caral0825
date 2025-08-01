@@ -151,7 +151,7 @@ const Header = () => {
                 >
                   <a 
                     href={menuItem.href} 
-                    className={`flex items-center gap-1 text-white text-sm uppercase font-semibold hover:text-gray-300 transition-colors`}
+                    className={`flex items-center gap-1 text-white text-sm  font-semibold hover:text-gray-300 transition-colors`}
                   >
                     {menuItem.title}
                     {menuItem.subItems.length > 0 && (
@@ -183,7 +183,7 @@ const Header = () => {
                 >
                   <a 
                     href={menuItem.href} 
-                    className={`flex items-center gap-1 text-white text-sm uppercase font-semibold hover:text-gray-300 transition-colors`}
+                    className={`flex items-center gap-1 text-white text-sm  font-semibold hover:text-gray-300 transition-colors`}
                   >
                     {menuItem.title}
                     {menuItem.subItems.length > 0 && (
