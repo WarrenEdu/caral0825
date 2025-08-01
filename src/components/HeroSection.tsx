@@ -1,92 +1,65 @@
 import { Button } from "@/components/ui/button";
-import { MapPin, Camera } from "lucide-react";
-import vichamaBanner from "@/assets/vichama-banner.jpg";
 import { motion } from "framer-motion";
+
+// Asegúrate de que esta imagen sea un mapa real o reemplázala con la URL de tu mapa de fondo.
+// Basado en la imagen, el fondo es un mapa, no el vichama-banner.jpg anterior.
+// Si no tienes una URL de mapa, puedes usar una genérica de un CDN o un placeholder.
+// Ejemplo: import mapBackground from "@/assets/your-map-background.jpg";
+// Por simplicidad, usaré un placeholder URL o el que ya tenías pero con la aclaración.
+import mapBackground from "@/assets/vichama-banner.jpg"; // <--- ADVERTENCIA: Reemplaza esta URL con una imagen de mapa si vichama-banner.jpg NO es un mapa.
+// Si tienes una URL de imagen de mapa como: https://example.com/map_image.jpg, úsala aquí.
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-fixed" style={{backgroundImage: `url(${vichamaBanner})`}}>
-      {/* Angular Overlays */}
-      <div className="absolute inset-0 angular-overlay">
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
-      </div>
+    <section 
+      className="relative w-full min-h-screen flex items-center bg-cover bg-center font-barlow"
+      style={{ backgroundImage: `url(${mapBackground})` }}
+    >
+      {/* Overlay Oscuro */}
+      <div className="absolute inset-0 bg-black bg-opacity-40"></div>
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4">
-        <div className="max-w-3xl">
-          <motion.div 
-            className="mb-6"
+      {/* Contenido Principal */}
+      <div className="relative z-10 container mx-auto px-4 md:px-8 py-20 md:py-0">
+        <div className="max-w-xl text-left"> {/* Alineado a la izquierda */}
+          <motion.h1 
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <motion.p 
-              className="text-caral-ochre font-medium text-lg mb-2 tracking-wide"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              PATRIMONIO MUNDIAL DE LA HUMANIDAD
-            </motion.p>
-            <motion.h1 
-              className="text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              CARAL PERÚ
-            </motion.h1>
-            <motion.p 
-              className="text-2xl md:text-3xl text-caral-sand font-light mb-8 leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-            >
-              LA CIVILIZACIÓN MÁS ANTIGUA DE AMÉRICA
-            </motion.p>
-          </motion.div>
-
-          <motion.p 
-            className="text-lg text-white/90 mb-8 max-w-2xl leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.0 }}
-          >
-            Descubre los secretos de la civilización más antigua del continente americano. 
-            Caral, con más de 5000 años de antigüedad, revela los orígenes de la cultura peruana 
-            y las bases de la civilización andina.
-          </motion.p>
-
+            Navigate our map collection.
+          </motion.h1>
+          
           <motion.div 
-            className="flex flex-col sm:flex-row gap-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
           >
             <Button 
               size="lg"
-              className="bg-white/20 backdrop-blur-sm border border-white/30 text-white hover:bg-[rgb(180,24,35)] hover:border-[rgb(180,24,35)] font-semibold px-8 py-4 text-lg shadow-elegant transition-all duration-300"
+              className="px-8 py-4 text-lg border-2 border-white text-white bg-transparent uppercase hover:bg-white hover:text-black transition-colors duration-300"
             >
-              <MapPin className="mr-2 h-5 w-5" />
-              Ruta Caral
-            </Button>
-            <Button 
-              size="lg"
-              className="bg-white/20 backdrop-blur-sm border border-white/30 text-white hover:bg-[rgb(180,24,35)] hover:border-[rgb(180,24,35)] font-semibold px-8 py-4 text-lg shadow-elegant transition-all duration-300"
-            >
-              <Camera className="mr-2 h-5 w-5" />
-              Museo Caral
+              EXPLORE MAP LIBRARY
             </Button>
           </motion.div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-bounce" />
-        </div>
-      </div>
+      {/* Botón flotante "TICKETS" */}
+      <aside className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20">
+        <Button
+          className="bg-gray-300 text-gray-800 text-sm md:text-base py-5 px-2 md:py-6 md:px-3 uppercase rounded-md shadow-lg hover:bg-gray-400 transition-colors duration-300"
+          style={{ writingMode: 'vertical-lr' }} // Mantener estilo inline para writing-mode
+        >
+          TICKETS
+        </Button>
+      </aside>
+
+      {/* Imagen pequeña en la esquina inferior derecha (opcional, si aún la deseas) */}
+      {/* Si tienes una imagen específica para esto, reemplaza el src */}
+      {/* <div className="absolute bottom-4 right-4 z-10">
+        <img src="URL_DE_TU_IMAGEN_PEQUEÑA" alt="Detalle" className="w-24 h-auto opacity-75" />
+      </div> */}
     </section>
   );
 };
