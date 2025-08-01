@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card"; // CardHeader ya no es estrictamente necesario con este diseño
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -26,8 +26,8 @@ const NewsSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-[rgb(21,55,108)] text-white"> {/* Fondo azul oscuro */}
-      <div className="container mx-auto px-4 max-w-5xl"> {/* Contenedor más estrecho para el contenido superior */}
+    <section className="py-20 bg-[rgb(21,55,108)] text-white">
+      <div className="container mx-auto px-4 max-w-5xl">
         
         {/* Encabezado con cita y flechas de navegación */}
         <motion.div
@@ -67,20 +67,21 @@ const NewsSection = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col group relative"> {/* Added relative for absolute positioning of text overlay */}
+              <Card className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col group relative">
                 <div className="relative overflow-hidden">
-                  {/* Contenedor de la imagen para el efecto de escala y reducción de altura */}
-                  <div className="h-48"> {/* Altura fija para el contenedor de la imagen */}
+                  {/* Contenedor de la imagen para el efecto de recorte y subida */}
+                  {/* *** CAMBIO CLAVE AQUÍ: h-48 y group-hover:h-[calc(48*0.8px)] para un 80% de la altura inicial *** */}
+                  <div className="h-48 group-hover:h-[calc(48*0.8px)] transition-[height] duration-300 relative overflow-hidden"> {/* Ojo: Tailind no soporta calc() directamente en h-x, ajustamos a px para el ejemplo */}
                     <img 
                       src={article.image} 
                       alt={article.title}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[0.98] group-hover:h-[95%] transform origin-bottom"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:-translate-y-[10%]" /* Subida de la imagen */
                     />
                   </div>
                 </div>
                 
                 {/* Contenido de la tarjeta - Título visible siempre, excerpt aparece al hover */}
-                <CardContent className="p-6 pt-4 flex-grow flex flex-col justify-end relative z-10"> {/* Adjusted padding-top */}
+                <CardContent className="p-6 pt-4 flex-grow flex flex-col justify-end relative z-10">
                   {/* Título siempre visible */}
                   <h3 className="text-xl font-semibold mb-2">
                     {article.title}
@@ -89,10 +90,10 @@ const NewsSection = () => {
                   {/* Excerpt que aparece al hover */}
                   <motion.div
                     className="absolute bottom-6 left-6 right-6 text-sm text-gray-600 leading-relaxed overflow-hidden"
-                    initial={{ opacity: 0, height: 0, y: 10 }} // Oculto y abajo por defecto
-                    animate={{ opacity: 0, height: 0, y: 10 }} // Mantener oculto por defecto
-                    whileInView={{ opacity: 0, height: 0, y: 10 }} // Asegurar que no se muestre al entrar en vista sin hover
-                    whileHover={{ opacity: 1, height: "auto", y: 0 }} // Aparece y sube al hover
+                    initial={{ opacity: 0, height: 0, y: 10 }}
+                    animate={{ opacity: 0, height: 0, y: 10 }}
+                    whileInView={{ opacity: 0, height: 0, y: 10 }}
+                    whileHover={{ opacity: 1, height: "auto", y: 0 }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
                   >
                     <p>{article.excerpt}</p>
