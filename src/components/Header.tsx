@@ -67,9 +67,6 @@ const Header = () => {
   const rightMenuItems = allMenuItems.slice(4);
 
   const renderDropdownContent = (subItems) => {
-    // Determine how to split subItems into two columns for better distribution
-    // If there are 4 or fewer, keep them in one column for simplicity and alignment.
-    // If more than 4, split into two columns.
     let firstColumn = [];
     let secondColumn = [];
 
@@ -82,10 +79,9 @@ const Header = () => {
     }
 
     return (
-      <div className="flex flex-col md:flex-row py-8 px-12 w-full max-w-7xl mx-auto"> {/* Adjusted padding */}
+      <div className="flex flex-col md:flex-row py-8 px-12 w-full max-w-7xl mx-auto">
         {/* Sección Izquierda: Subtítulos dinámicos */}
-        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-4 pr-12 mb-8 md:mb-0"> {/* Increased gap-x, adjusted pr */}
-          {/* Columna 1 de subtítulos */}
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-4 pr-12 mb-8 md:mb-0">
           <div>
             <h3 className="text-white text-lg font-semibold mb-4 border-b border-dashed border-white/50 pb-2">Contenido</h3>
             <ul className="space-y-2">
@@ -94,10 +90,9 @@ const Header = () => {
               ))}
             </ul>
           </div>
-          {/* Columna 2 de subtítulos (solo si hay suficientes elementos para una segunda columna) */}
           {secondColumn.length > 0 && (
             <div>
-              <h3 className="text-white text-lg font-semibold mb-4 border-b border-dashed border-white/50 pb-2 hidden md:block"></h3> {/* Empty title, hidden on mobile */}
+              <h3 className="text-white text-lg font-semibold mb-4 border-b border-dashed border-white/50 pb-2 hidden md:block"></h3>
               <ul className="space-y-2">
                 {secondColumn.map((item) => (
                   <li key={item}><a href="#" className="text-gray-200 hover:text-white transition-colors">{item}</a></li>
@@ -108,13 +103,12 @@ const Header = () => {
         </div>
 
         {/* Separador Vertical (visible en desktop) */}
-        {/* Usamos un div separado para la línea punteada para mejor control del estilo y alineación */}
         <div className="hidden md:flex justify-center items-center px-6"> 
           <div className="h-full w-px border-l-2 border-dashed border-white/50"></div>
         </div>
 
         {/* Sección Derecha: Experience historic Florida. (Fija) */}
-        <div className="flex-1 pl-12 flex flex-col justify-center items-start text-left"> {/* Adjusted pl */}
+        <div className="flex-1 pl-12 flex flex-col justify-center items-start text-left">
           <h2 className="text-white text-4xl md:text-5xl font-bold mb-6 leading-tight">
             Experience historic <br /> Florida.
           </h2>
@@ -146,8 +140,8 @@ const Header = () => {
       >
         <div className="flex items-center justify-between h-20">
           {/* Desktop Navigation - Left Side */}
-          <nav className="hidden lg:flex flex-1 justify-end items-center px-4">
-            <div className="flex gap-x-12"> {/* Increased gap-x for more space */}
+          <nav className="hidden lg:flex flex-1 justify-end items-center pr-12"> {/* Increased pr to move menu items away from logo */}
+            <div className="flex gap-x-12">
               {leftMenuItems.map((menuItem) => (
                 <div 
                   key={menuItem.title} 
@@ -178,8 +172,8 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation - Right Side */}
-          <nav className="hidden lg:flex flex-1 justify-start items-center px-4">
-            <div className="flex gap-x-12"> {/* Increased gap-x for more space */}
+          <nav className="hidden lg:flex flex-1 justify-start items-center pl-12"> {/* Increased pl to move menu items away from logo */}
+            <div className="flex gap-x-12">
               {rightMenuItems.map((menuItem) => (
                 <div 
                   key={menuItem.title} 
@@ -215,7 +209,7 @@ const Header = () => {
       {/* Dropdown Menu (visible solo en desktop y cuando activeDropdown es true y tiene subItems) */}
       {activeDropdown && allMenuItems.find(item => item.title === activeDropdown)?.subItems.length > 0 && (
         <motion.div
-          className={`absolute top-full left-0 right-0 ${RED_COLOR_CLASS} z-40 shadow-xl border-t border-gray-700 hidden lg:block`} {/* Removed py-8 from here, moved to renderDropdownContent */}
+          className={`absolute top-full left-0 right-0 ${RED_COLOR_CLASS} z-40 shadow-xl border-t border-gray-700 hidden lg:block`}
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
