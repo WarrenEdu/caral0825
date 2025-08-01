@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [activeDropdown, setActiveDropdown] = null;
 
   const RED_COLOR_CLASS = "bg-[rgb(180,24,35)]";
 
@@ -22,13 +22,13 @@ const Header = () => {
 
   // Determina la clase de fondo del header
   const headerBgClass = () => {
-    if (isScrolled || activeDropdown) { // Siempre rojo si hay scroll o dropdown de escritorio
+    if (isScrolled || activeDropdown) { 
       return RED_COLOR_CLASS + ' shadow-lg';
     }
-    if (isMenuOpen && window.innerWidth < 1024) { // Solo rojo si menú móvil abierto Y en móvil
+    if (isMenuOpen && window.innerWidth < 1024) { 
       return RED_COLOR_CLASS + ' shadow-lg';
     }
-    return 'bg-transparent'; // Transparente por defecto
+    return 'bg-transparent'; 
   };
 
   const allMenuItems = [
@@ -136,7 +136,7 @@ const Header = () => {
 
   return (
     <motion.header 
-      className={`fixed top-0 w-full z-50 transition-all duration-300 font-barlow ${headerBgClass()}`} // Llama a la función para la clase
+      className={`fixed top-0 w-full z-50 transition-all duration-300 font-barlow ${headerBgClass()}`} 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
@@ -145,7 +145,7 @@ const Header = () => {
         className="container mx-auto px-4"
         onMouseLeave={() => setActiveDropdown(null)} 
       >
-        <div className="flex items-center justify-between h-20 relative"> {/* Añadido 'relative' para el posicionamiento absoluto del logo en desktop */}
+        <div className="flex items-center justify-between h-20 relative"> 
           {/* Logo para Mobile (visible solo en mobile, a la izquierda) */}
           <div className="lg:hidden flex items-center">
             <img 
@@ -156,8 +156,8 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation - Left Side */}
-          <nav className="hidden lg:flex flex-1 justify-end items-center pr-6">
-            <div className="flex gap-x-8">
+          <nav className="hidden lg:flex flex-1 justify-end items-center pr-12"> {/* Aumentado pr para más espacio */}
+            <div className="flex gap-x-6"> {/* Reducido gap-x para títulos individuales */}
               {leftMenuItems.map((menuItem) => (
                 <div 
                   key={menuItem.title} 
@@ -178,7 +178,7 @@ const Header = () => {
             </div>
           </nav>
 
-          {/* Logo Central (para desktop) - Vuelve a ser absoluto */}
+          {/* Logo Central (para desktop) - Posicionamiento absoluto, oculto en mobile */}
           <div className="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center">
             <img 
               src={caralLogoBanner} 
@@ -188,8 +188,8 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation - Right Side */}
-          <nav className="hidden lg:flex flex-1 justify-start items-center pl-6">
-            <div className="flex gap-x-8">
+          <nav className="hidden lg:flex flex-1 justify-start items-center pl-12"> {/* Aumentado pl para más espacio */}
+            <div className="flex gap-x-6"> {/* Reducido gap-x para títulos individuales */}
               {rightMenuItems.map((menuItem) => (
                 <div 
                   key={menuItem.title} 
