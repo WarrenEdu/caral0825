@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown } from "lucide-react"; // Añadimos ChevronDown para los dropdowns
+import { Menu, X, ChevronDown, ArrowRight } from "lucide-react"; // Añadimos ChevronDown y ArrowRight
 import caralLogoBanner from "@/assets/caral-logo-banner.png"; // Usamos caralLogoBanner para este menú
 import { motion } from "framer-motion";
 
@@ -21,7 +21,7 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const menuItems = [
+  const allMenuItems = [
     { 
       title: "Institución", 
       href: "#", 
@@ -64,6 +64,60 @@ const Header = () => {
     }
   ];
 
+  const leftMenuItems = allMenuItems.slice(0, 4);
+  const rightMenuItems = allMenuItems.slice(4);
+
+  // Contenido dinámico para los dropdowns basado en los subItems
+  const renderDropdownContent = (subItems) => {
+    const half = Math.ceil(subItems.length / 2);
+    const firstColumn = subItems.slice(0, half);
+    const secondColumn = subItems.slice(half);
+
+    return (
+      <div className="flex flex-col md:flex-row p-8 w-full max-w-7xl mx-auto">
+        {/* Sección Izquierda: Subtítulos dinámicos */}
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 pr-8 mb-8 md:mb-0">
+          {/* Columna 1 de subtítulos */}
+          <div>
+            <h3 className="text-white text-lg font-semibold mb-4 border-b border-dashed border-white/50 pb-2">Contenido</h3>
+            <ul className="space-y-2">
+              {firstColumn.map((item) => (
+                <li key={item}><a href="#" className="text-gray-200 hover:text-white transition-colors">{item}</a></li>
+              ))}
+            </ul>
+          </div>
+          {/* Columna 2 de subtítulos (solo si hay suficientes elementos) */}
+          {secondColumn.length > 0 && (
+            <div>
+              <h3 className="text-white text-lg font-semibold mb-4 border-b border-dashed border-white/50 pb-2"></h3> {/* Título vacío o genérico */}
+              <ul className="space-y-2">
+                {secondColumn.map((item) => (
+                  <li key={item}><a href="#" className="text-gray-200 hover:text-white transition-colors">{item}</a></li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        {/* Separador Vertical (visible en desktop) */}
+        <div className="hidden md:block w-px bg-white/50 border-l border-dashed border-white/50 my-auto h-auto min-h-[200px]"></div>
+
+        {/* Sección Derecha: Experience historic Florida. (Fija) */}
+        <div className="flex-1 pl-8 flex flex-col justify-center items-start text-left">
+          <h2 className="text-white text-4xl md:text-5xl font-bold mb-6 leading-tight">
+            Experience historic <br /> Florida.
+          </h2>
+          <Button 
+            variant="ghost" 
+            className="text-white text-lg hover:text-gray-300 transition-colors flex items-center gap-2 px-0"
+          >
+            BUY TICKETS <ArrowRight className="w-5 h-5 ml-1" />
+          </Button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <motion.header 
       className={`fixed top-0 w-full z-50 transition-all duration-300 font-barlow ${
@@ -80,6 +134,29 @@ const Header = () => {
         onMouseLeave={() => setActiveDropdown(null)} // Cerrar cualquier dropdown al salir del área del header
       >
         <div className="flex items-center justify-between h-20">
+          {/* Desktop Navigation - Left Side */}
+          <nav className="hidden lg:flex flex-1 justify-end items-center px-4"> {/* justify-end para empujar a la izquierda */}
+            <div className="flex gap-x-8">
+              {leftMenuItems.map((menuItem) => (
+                <div 
+                  key={menuItem.title} 
+                  className="relative"
+                  onMouseEnter={() => setActiveDropdown(menuItem.title)}
+                >
+                  <a 
+                    href={menuItem.href} 
+                    className={`flex items-center gap-1 text-white text-sm uppercase font-semibold hover:text-gray-300 transition-colors`}
+                  >
+                    {menuItem.title}
+                    {menuItem.subItems.length > 0 && (
+                      <ChevronDown className={`h-4 w-4 transition-transform ${activeDropdown === menuItem.title ? 'rotate-180' : ''}`} />
+                    )}
+                  </a>
+                </div>
+              ))}
+            </div>
+          </nav>
+
           {/* Logo Central (para desktop) */}
           <div className="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center">
             <img 
@@ -89,49 +166,27 @@ const Header = () => {
             />
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex flex-1 justify-between items-center px-4">
-            {menuItems.map((menuItem) => (
-              <div 
-                key={menuItem.title} 
-                className="relative"
-                onMouseEnter={() => setActiveDropdown(menuItem.title)} // Abrir el dropdown al pasar el mouse
-              >
-                <a 
-                  href={menuItem.href} 
-                  className={`flex items-center gap-1 text-white text-sm uppercase font-semibold hover:text-gray-300 transition-colors`}
+          {/* Desktop Navigation - Right Side */}
+          <nav className="hidden lg:flex flex-1 justify-start items-center px-4"> {/* justify-start para empujar a la derecha */}
+            <div className="flex gap-x-8">
+              {rightMenuItems.map((menuItem) => (
+                <div 
+                  key={menuItem.title} 
+                  className="relative"
+                  onMouseEnter={() => setActiveDropdown(menuItem.title)}
                 >
-                  {menuItem.title}
-                  {menuItem.subItems.length > 0 && (
-                    <ChevronDown className={`h-4 w-4 transition-transform ${activeDropdown === menuItem.title ? 'rotate-180' : ''}`} />
-                  )}
-                </a>
-
-                {/* Dropdown Menu (solo si tiene subItems y está activo) */}
-                {menuItem.subItems.length > 0 && activeDropdown === menuItem.title && (
-                  <motion.div
-                    className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max min-w-[200px] ${RED_COLOR_CLASS} rounded-lg shadow-lg border border-white/10 p-4 z-50`}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
+                  <a 
+                    href={menuItem.href} 
+                    className={`flex items-center gap-1 text-white text-sm uppercase font-semibold hover:text-gray-300 transition-colors`}
                   >
-                    <ul className="space-y-2">
-                      {menuItem.subItems.map((subItem) => (
-                        <li key={subItem}>
-                          <a 
-                            href="#" 
-                            className="block px-3 py-2 text-sm text-white/90 hover:text-white hover:bg-white/10 rounded-md transition-colors whitespace-nowrap"
-                          >
-                            {subItem}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                )}
-              </div>
-            ))}
+                    {menuItem.title}
+                    {menuItem.subItems.length > 0 && (
+                      <ChevronDown className={`h-4 w-4 transition-transform ${activeDropdown === menuItem.title ? 'rotate-180' : ''}`} />
+                    )}
+                  </a>
+                </div>
+              ))}
+            </div>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -146,11 +201,24 @@ const Header = () => {
         </div>
       </div>
 
+      {/* Dropdown Menu (visible solo en desktop y cuando activeDropdown es true) */}
+      {activeDropdown && allMenuItems.find(item => item.title === activeDropdown)?.subItems.length > 0 && (
+        <motion.div
+          className={`absolute top-full left-0 right-0 ${RED_COLOR_CLASS} z-40 py-8 shadow-xl border-t border-gray-700 hidden lg:block`}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.2 }}
+        >
+          {renderDropdownContent(allMenuItems.find(item => item.title === activeDropdown).subItems)}
+        </motion.div>
+      )}
+
       {/* Mobile Navigation */}
       {isMenuOpen && (
         <div className="lg:hidden py-4 border-t border-gray-700 bg-black bg-opacity-90">
           <nav className="flex flex-col space-y-2 px-4">
-            {menuItems.map((menuItem) => (
+            {allMenuItems.map((menuItem) => (
               <div key={menuItem.title}>
                 <Button 
                   variant="ghost" 
