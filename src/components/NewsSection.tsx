@@ -1,32 +1,28 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card"; // CardHeader ya no es estrictamente necesario con este diseño
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight } from "lucide-react"; // Importamos ArrowLeft también
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-// import noticiaTesoroImg from "@/assets/noticia-tesoro.png"; // Ya no importamos desde assets
-// import noticiaFestivalImg from "@/assets/noticia-festival.jpg"; // Ya no importamos desde assets
-// import YouTubeVideo from "@/components/YouTubeVideo"; // Esto podría no ser necesario si no hay videos en este diseño
 
 const NewsSection = () => {
   const news = [
     {
       id: 1,
-      title: "Events",
-      excerpt: "Join us on special dates with even more happening at the Museum.",
-      image: "https://nesweip.com/boceto_larco/imagenes/03_NOTICIA_TESORO.png", // Nueva URL de imagen
+      title: "Nuevos Descubrimientos en la Ciudad Sagrada de Caral",
+      excerpt: "Arqueólogos han encontrado evidencias de un complejo sistema de canales de riego que revoluciona nuestra comprensión sobre la organización social de Caral.",
+      image: "https://nesweip.com/boceto_larco/imagenes/03_NOTICIA_TESORO.png",
     },
     {
       id: 2,
-      title: "Accessibility",
-      excerpt: "Learn about accessibility features available for your visit.",
-      image: "https://nesweip.com/boceto_larco/imagenes/02_NOTICIA_PE%C3%91ICO.jpg", // Nueva URL de imagen
+      title: "Festival de la Civilización Caral 2024",
+      excerpt: "Se realizará el evento cultural más importante del año, donde se presentarán danzas, música y gastronomía ancestral de la cultura Caral.",
+      image: "https://nesweip.com/boceto_larco/imagenes/02_NOTICIA_PE%C3%91ICO.jpg",
     },
     {
       id: 3,
-      title: "Groups + Field Trips",
-      excerpt: "Bringing a group of 15 or more? Here's where to start planning.",
-      image: "https://nesweip.com/boceto_larco/imagenes/01_NOTICIA_PE%C3%91ICO.jpg", // Nueva URL de imagen
-    }
-    // Si necesitas más noticias, puedes añadirlas aquí, el grid se adaptará
+      title: "Caral: Patrimonio Mundial de la Humanidad",
+      excerpt: "Conmemoramos 15 años desde que la UNESCO declaró a Caral como Patrimonio Mundial, reconociendo su valor universal excepcional.",
+      image: "https://nesweip.com/boceto_larco/imagenes/01_NOTICIA_PE%C3%91ICO.jpg",
+    },
   ];
 
   return (
@@ -35,7 +31,7 @@ const NewsSection = () => {
         
         {/* Encabezado con cita y flechas de navegación */}
         <motion.div
-          className="text-center mb-24 relative" // Añadimos relative para posicionar las flechas
+          className="text-center mb-24 relative"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -52,8 +48,8 @@ const NewsSection = () => {
           </div>
 
           <p className="italic text-xl md:text-2xl mb-6">
-            “This might be my most favorite museum in Chicago. [Griffin MSI has] done a <br className="hidden md:block" /> {/* Salto de línea para desktop */}
-            lot to take it beyond the ‘80s style exhibits into more, flashy 21st century <br className="hidden md:block" /> {/* Salto de línea para desktop */}
+            “This might be my most favorite museum in Chicago. [Griffin MSI has] done a <br className="hidden md:block" />
+            lot to take it beyond the ‘80s style exhibits into more, flashy 21st century <br className="hidden md:block" />
             displays.”
           </p>
           <p className="text-sm text-gray-300">
@@ -62,7 +58,7 @@ const NewsSection = () => {
         </motion.div>
 
         {/* Grid de noticias/tarjetas */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"> {/* Grid de 3 columnas para desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {news.map((article, index) => (
             <motion.div
               key={article.id}
@@ -71,52 +67,41 @@ const NewsSection = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col group"> {/* Fondo blanco para las tarjetas */}
+              <Card className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col group relative"> {/* Added relative for absolute positioning of text overlay */}
                 <div className="relative overflow-hidden">
-                  {/* Contenedor de la imagen para el efecto de escala */}
+                  {/* Contenedor de la imagen para el efecto de escala y reducción de altura */}
                   <div className="h-48"> {/* Altura fija para el contenedor de la imagen */}
                     <img 
                       src={article.image} 
                       alt={article.title}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[0.98] group-hover:h-[95%] transform origin-bottom" /* Efecto de reducción de altura y zoom sutil */
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[0.98] group-hover:h-[95%] transform origin-bottom"
                     />
                   </div>
                 </div>
                 
-                <CardContent className="p-6 flex-grow flex flex-col justify-end"> {/* Flex-grow para ocupar espacio restante, justify-end para anclar abajo */}
-                  {/* Contenedor para el texto que se sube */}
+                {/* Contenido de la tarjeta - Título visible siempre, excerpt aparece al hover */}
+                <CardContent className="p-6 pt-4 flex-grow flex flex-col justify-end relative z-10"> {/* Adjusted padding-top */}
+                  {/* Título siempre visible */}
+                  <h3 className="text-xl font-semibold mb-2">
+                    {article.title}
+                  </h3>
+
+                  {/* Excerpt que aparece al hover */}
                   <motion.div
-                    className="transition-transform duration-300 group-hover:-translate-y-2" // Efecto de subida al hover
+                    className="absolute bottom-6 left-6 right-6 text-sm text-gray-600 leading-relaxed overflow-hidden"
+                    initial={{ opacity: 0, height: 0, y: 10 }} // Oculto y abajo por defecto
+                    animate={{ opacity: 0, height: 0, y: 10 }} // Mantener oculto por defecto
+                    whileInView={{ opacity: 0, height: 0, y: 10 }} // Asegurar que no se muestre al entrar en vista sin hover
+                    whileHover={{ opacity: 1, height: "auto", y: 0 }} // Aparece y sube al hover
+                    transition={{ duration: 0.3, ease: "easeOut" }}
                   >
-                    <h3 className="text-xl font-semibold mb-2">
-                      {article.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                      {article.excerpt}
-                    </p>
+                    <p>{article.excerpt}</p>
                   </motion.div>
                 </CardContent>
               </Card>
             </motion.div>
           ))}
         </div>
-
-        {/* El botón "Ver todas las noticias" parece no estar en este diseño específico, lo comentamos o quitamos */}
-        {/* <motion.div 
-          className="text-center mt-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
-        >
-          <Button 
-            variant="outline"
-            size="lg"
-            className="border-caral-ochre text-caral-ochre hover:bg-caral-ochre hover:text-white"
-          >
-            Ver todas las noticias
-          </Button>
-        </motion.div> */}
       </div>
     </section>
   );
