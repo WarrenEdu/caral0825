@@ -1,115 +1,115 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-// No necesitamos Card, CardContent, MapPin, Users, Calendar, Award para este diseño específico
-// import { Card, CardContent } from "@/components/ui/card";
-// import { MapPin, Users, Calendar, Award } from "lucide-react";
-// import { useInView } from "framer-motion"; // useInView no es necesario si solo usamos whileInView en el padre
 
-// Asume que tienes una imagen en tus assets para esta sección, por ejemplo:
-import museumImage from "@/assets/presidential-funerals.png"; // Reemplaza con la ruta real de tu imagen
+// Asume que tienes estas imágenes en tus assets. Reemplaza las rutas.
+import museumMainImage from "@/assets/presidential-funerals.png"; // La imagen principal del centro
+import awardLogo1 from "@/assets/award-30th.png"; // Primer logo de premio
+import awardLogo2 from "@/assets/award-best-houston-2021.png"; // Segundo logo de premio
+import awardLogo3 from "@/assets/award-best-houston-winner.png"; // Tercer logo de premio
+
 
 const AboutSection = () => {
-  // Las estadísticas ya no son necesarias para este diseño, las eliminamos o comentamos
-  /*
-  const stats = [
-    { icon: Calendar, value: "5000+", label: "Años de antigüedad" },
-    { icon: MapPin, value: "626", label: "Hectáreas" },
-    { icon: Users, value: "18", label: "Sitios arqueológicos" },
-    { icon: Award, value: "2009", label: "Patrimonio Mundial" }
-  ];
-  */
-
   return (
-    <section className="py-20 bg-background text-foreground relative z-10"> {/* Ajusta el fondo y color de texto si es necesario */}
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row gap-16 items-center lg:items-start"> {/* Cambiado a flex-col y lg:flex-row */}
+    <section className="py-20 bg-white text-gray-800 font-serif"> {/* Fondo blanco y fuente serif para parecerse a la imagen */}
+      <div className="container mx-auto px-4 max-w-7xl"> {/* Contenedor más amplio */}
+        
+        {/* Subtítulo superior */}
+        <motion.p 
+          className="text-gray-500 text-center text-sm mb-2" // Color y tamaño de fuente
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          The National Museum of Funeral History
+        </motion.p>
+
+        {/* Título principal con líneas decorativas */}
+        <motion.div
+          className="flex items-center justify-center mb-12 gap-x-4" // Centrar el título y las líneas
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <div className="flex-grow border-t border-gray-300 max-w-[100px]"></div> {/* Línea izquierda */}
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-700 leading-tight tracking-wider uppercase whitespace-nowrap">
+            WELCOME TO OUR MUSEUM
+          </h2>
+          <div className="flex-grow border-t border-gray-300 max-w-[100px]"></div> {/* Línea derecha */}
+        </motion.div>
+
+        {/* Contenido principal: texto + imagen + texto */}
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between lg:gap-16">
           
-          {/* Content (Left Side - like the text on the left in image_e5fd83.png) */}
+          {/* Left Text Block */}
           <motion.div
-            className="lg:w-1/2" // Ocupa la mitad del ancho en pantallas grandes
-            initial={{ opacity: 0, x: -50 }} // Animación desde la izquierda
+            className="lg:w-1/3 mb-8 lg:mb-0 text-gray-600 text-sm leading-relaxed" // Ancho y estilo de texto
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, amount: 0.2 }} // Ajusta amount para cuándo se activa la animación
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true, amount: 0.3 }}
           >
-            <motion.p 
-              className="text-muted-foreground text-sm uppercase tracking-widest mb-2" // Pequeño texto superior
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              The National Museum of Funeral History
-            </motion.p>
-            <motion.h2 
-              className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight" // Título principal
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              WELCOME TO OUR MUSEUM
-            </motion.h2>
-
-            <motion.div 
-              className="space-y-6 text-lg text-muted-foreground leading-relaxed mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <p className="text-sm md:text-base"> {/* Ajustado el tamaño de texto a sm/base para parecerse a la imagen */}
-                The National Museum of Funeral History is an educational experience like no other and offers something for everyone. Discover America's largest collection of authentic, historical funeral service items.
-              </p>
-              <p className="text-sm md:text-base"> {/* Segundo párrafo para el texto de la derecha */}
-                Learn about caskets and coffins, hearses through history, plus the funerals of Presidents, Popes, celebrities and more while you witness the cultural heritage of the funeral service industry and its time-honored tradition of compassion.
-              </p>
-            </motion.div>
-
-            {/* Este div contendría los logos/premios si los necesitas, similar a image_e5fd83.png */}
-            <motion.div
-                className="flex items-center space-x-4 mt-8"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                viewport={{ once: true }}
-            >
-                {/* Aquí irían tus imágenes de premios/logos si los tienes */}
-                {/* Ejemplo: <img src={award1} alt="Award 1" className="h-16" /> */}
-                {/* Ejemplo: <img src={award2} alt="Award 2" className="h-16" /> */}
-                 <p className="text-xs text-gray-500 italic">Premios y Reconocimientos (Placeholder)</p> {/* Placeholder */}
-            </motion.div>
-
+            <p className="mb-4">
+              The National Museum of Funeral History is an educational experience like no other and offers something for everyone. Discover America's largest collection of authentic, historical funeral service items.
+            </p>
+            
+            {/* Logos/Premios */}
+            <div className="mt-6 space-y-4">
+              <p className="text-xs font-semibold text-gray-500">NATIONAL MUSEUM OF FUNERAL HISTORY</p> {/* Texto superior de logos */}
+              <div className="flex items-center space-x-4">
+                <img src={awardLogo1} alt="30th Anniversary Award" className="h-20 w-auto object-contain" /> {/* Ajusta h-auto y w-auto para mantener proporción */}
+                <img src={awardLogo2} alt="Best Houston 2021 Award" className="h-20 w-auto object-contain" />
+                <img src={awardLogo3} alt="Best Houston Winner Award" className="h-20 w-auto object-contain" />
+              </div>
+            </div>
           </motion.div>
 
-          {/* Image/Gallery (Right Side - like the image in image_e5fd83.png) */}
+          {/* Central Image Block */}
           <motion.div
-            className="lg:w-1/2 flex justify-center items-center" // Ocupa la mitad del ancho y centra el contenido
-            initial={{ opacity: 0, x: 50 }} // Animación desde la derecha
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            viewport={{ once: true, amount: 0.2 }}
+            className="lg:w-1/3 flex flex-col items-center justify-center mb-8 lg:mb-0" // Centrar la imagen en su columna
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true, amount: 0.3 }}
           >
-            <img 
-              src={museumImage} // Usa la imagen importada
-              alt="Presidential Funerals Exhibit" 
-              className="w-full h-auto max-w-lg shadow-lg rounded-lg object-cover" // Ajusta el tamaño y estilo de la imagen
-            />
+            <div className="bg-white p-4 shadow-lg border border-gray-200"> {/* Contenedor para el "frame" blanco alrededor de la imagen */}
+              <h3 className="text-center text-lg font-semibold mb-2 text-gray-700">PRESIDENTIAL FUNERALS</h3>
+              <img 
+                src={museumMainImage} 
+                alt="Presidential Funerals Exhibit" 
+                className="w-full h-auto object-cover max-h-[400px]" // Ajusta el tamaño de la imagen
+              />
+            </div>
+          </motion.div>
+
+          {/* Right Text Block */}
+          <motion.div
+            className="lg:w-1/3 text-gray-600 text-sm leading-relaxed" // Ancho y estilo de texto
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            <p>
+              Learn about caskets and coffins, hearses through history, plus the funerals of Presidents, Popes, celebrities and more while you witness the cultural heritage of the funeral service industry and its time-honored tradition of compassion.
+            </p>
+            {/* El botón se mueve fuera de esta columna para alinearse al final */}
           </motion.div>
 
         </div>
-        
-        {/* Botón "Tickets to the Museum" debajo de la sección de imagen en la imagen de referencia */}
+
+        {/* Botón "Tickets to the Museum" - Alineado a la derecha, debajo de todo */}
         <motion.div
-          className="flex justify-center mt-12 lg:mt-0 lg:justify-end lg:pr-[calc(50%+8rem)]" // Ajusta la posición del botón
+          className="flex justify-end mt-12" // Alineación a la derecha y margen superior
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          viewport={{ once: true, amount: 0.2 }}
         >
           <Button
             size="lg"
-            className="bg-caral-ochre hover:bg-caral-ochre/90 text-white font-semibold px-8 py-4" // Color del botón similar al de la imagen
+            className="bg-stone-200 hover:bg-stone-300 text-gray-700 font-semibold px-8 py-4 rounded-none uppercase tracking-wide text-sm" // Estilo del botón similar a la imagen
           >
             Tickets to the Museum
           </Button>
