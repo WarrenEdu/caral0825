@@ -286,3 +286,17 @@ const Header = () => {
                         >
                           {subItem}
                         </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </nav>
+        </motion.div>
+      )}
+    </motion.header>
+  );
+};
+
+export default Header;
