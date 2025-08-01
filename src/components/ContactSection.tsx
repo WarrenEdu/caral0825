@@ -15,12 +15,12 @@ const NewsletterSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
           {/* Left section: Text content */}
           <div className="flex flex-col space-y-4">
-            <span className="text-sm font-serif text-gray-500">Museum news</span>
+            <span className="text-sm font-serif text-gray-500">Museo Caral</span>
             <h2 className="text-4xl font-light text-black">
-              JOIN OUR <br /> NEWSLETTER
+              Cultura <br /> Caral
             </h2>
             <p className="text-gray-600">
-              Stay up to date with our latest press releases, new exhibits and events by subscribing to our newsletter.
+              Completa el formulario y nos pondremos en contacto contigo pronto.
             </p>
           </div>
           
@@ -51,7 +51,7 @@ const NewsletterSection = () => {
               <div className="pb-2 border-b border-gray-300">
                 <Input 
                   type="text" 
-                  placeholder="Zip Code" 
+                  placeholder="Mensaje" 
                   className="h-12 border-none bg-white focus-visible:ring-0 focus-visible:ring-offset-0" 
                 />
               </div>
