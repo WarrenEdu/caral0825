@@ -1,64 +1,68 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calendar, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react"; // Importamos ArrowLeft también
 import { motion } from "framer-motion";
-import noticiaTesoroImg from "@/assets/noticia-tesoro.png";
-import noticiaFestivalImg from "@/assets/noticia-festival.jpg";
-import YouTubeVideo from "@/components/YouTubeVideo";
+// import noticiaTesoroImg from "@/assets/noticia-tesoro.png"; // Ya no importamos desde assets
+// import noticiaFestivalImg from "@/assets/noticia-festival.jpg"; // Ya no importamos desde assets
+// import YouTubeVideo from "@/components/YouTubeVideo"; // Esto podría no ser necesario si no hay videos en este diseño
 
 const NewsSection = () => {
   const news = [
     {
       id: 1,
-      title: "Nuevos Descubrimientos en la Ciudad Sagrada de Caral",
-      excerpt: "Arqueólogos han encontrado evidencias de un complejo sistema de canales de riego que revoluciona nuestra comprensión sobre la organización social de Caral.",
-      date: "15 de Julio, 2024",
-      image: noticiaTesoroImg,
-      category: "Investigación"
+      title: "Events",
+      excerpt: "Join us on special dates with even more happening at the Museum.",
+      image: "https://nesweip.com/boceto_larco/imagenes/03_NOTICIA_TESORO.png", // Nueva URL de imagen
     },
     {
       id: 2,
-      title: "Festival de la Civilización Caral 2024",
-      excerpt: "Se realizará el evento cultural más importante del año, donde se presentarán danzas, música y gastronomía ancestral de la cultura Caral.",
-      date: "28 de Julio, 2024",
-      image: noticiaFestivalImg,
-      category: "Eventos"
+      title: "Accessibility",
+      excerpt: "Learn about accessibility features available for your visit.",
+      image: "https://nesweip.com/boceto_larco/imagenes/02_NOTICIA_PE%C3%91ICO.jpg", // Nueva URL de imagen
     },
     {
       id: 3,
-      title: "Caral: Patrimonio Mundial de la Humanidad",
-      excerpt: "Conmemoramos 15 años desde que la UNESCO declaró a Caral como Patrimonio Mundial, reconociendo su valor universal excepcional.",
-      date: "28 de Junio, 2024",
-      image: "",
-      category: "Patrimonio",
-      isVideo: true,
-      videoId: "PlFSHmGoMbY"
+      title: "Groups + Field Trips",
+      excerpt: "Bringing a group of 15 or more? Here's where to start planning.",
+      image: "https://nesweip.com/boceto_larco/imagenes/01_NOTICIA_PE%C3%91ICO.jpg", // Nueva URL de imagen
     }
+    // Si necesitas más noticias, puedes añadirlas aquí, el grid se adaptará
   ];
 
   return (
-    <section className="py-20 section-overlay relative z-10">
-      <div className="container mx-auto px-4">
-        <motion.div 
-          className="text-center mb-16"
+    <section className="py-20 bg-[rgb(21,55,108)] text-white"> {/* Fondo azul oscuro */}
+      <div className="container mx-auto px-4 max-w-5xl"> {/* Contenedor más estrecho para el contenido superior */}
+        
+        {/* Encabezado con cita y flechas de navegación */}
+        <motion.div
+          className="text-center mb-24 relative" // Añadimos relative para posicionar las flechas
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <p className="text-caral-ochre font-medium text-lg mb-4 tracking-wide">
-            ÚLTIMAS NOTICIAS
+          {/* Flechas de navegación (visuales, sin funcionalidad) */}
+          <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex justify-between items-center z-10 pointer-events-none">
+            <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 rounded-full w-10 h-10 pointer-events-auto">
+              <ArrowLeft className="h-6 w-6" />
+            </Button>
+            <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 rounded-full w-10 h-10 pointer-events-auto">
+              <ArrowRight className="h-6 w-6" />
+            </Button>
+          </div>
+
+          <p className="italic text-xl md:text-2xl mb-6">
+            “This might be my most favorite museum in Chicago. [Griffin MSI has] done a <br className="hidden md:block" /> {/* Salto de línea para desktop */}
+            lot to take it beyond the ‘80s style exhibits into more, flashy 21st century <br className="hidden md:block" /> {/* Salto de línea para desktop */}
+            displays.”
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Noticias
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Mantente informado sobre los últimos descubrimientos, eventos y actividades 
-            de la Zona Arqueológica Caral
+          <p className="text-sm text-gray-300">
+            Rachel Azark, CBS Chicago
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Grid de noticias/tarjetas */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"> {/* Grid de 3 columnas para desktop */}
           {news.map((article, index) => (
             <motion.div
               key={article.id}
@@ -67,58 +71,38 @@ const NewsSection = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="group card-hover-line shadow-card hover:shadow-elegant transition-all duration-500 border-0 overflow-hidden">
+              <Card className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col group"> {/* Fondo blanco para las tarjetas */}
                 <div className="relative overflow-hidden">
-                  {(article as any).isVideo ? (
-                    <div className="h-48 angular-cut">
-                      <YouTubeVideo 
-                        videoId={(article as any).videoId}
-                        title={article.title}
-                        className="h-full"
-                      />
-                    </div>
-                  ) : (
+                  {/* Contenedor de la imagen para el efecto de escala */}
+                  <div className="h-48"> {/* Altura fija para el contenedor de la imagen */}
                     <img 
                       src={article.image} 
                       alt={article.title}
-                      className="w-full h-48 object-cover hover-scale-smooth angular-cut"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[0.98] group-hover:h-[95%] transform origin-bottom" /* Efecto de reducción de altura y zoom sutil */
                     />
-                  )}
-                  <div className="absolute top-4 left-4 z-10">
-                    <span className="bg-caral-ochre text-white px-3 py-1 rounded-full text-sm font-medium">
-                      {article.category}
-                    </span>
                   </div>
                 </div>
-              
-              <CardHeader className="p-6">
-                <div className="flex items-center text-muted-foreground text-sm mb-3">
-                  <Calendar className="h-4 w-4 mr-2" />
-                  {article.date}
-                </div>
-                <h3 className="text-xl font-semibold text-foreground group-hover:text-caral-ochre transition-colors">
-                  {article.title}
-                </h3>
-              </CardHeader>
-              
-              <CardContent className="px-6 pb-6">
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  {article.excerpt}
-                </p>
-                <Button 
-                  variant="ghost" 
-                  className="p-0 h-auto text-caral-ochre hover:text-caral-terracotta group/btn"
-                >
-                  Leer más
-                  <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                </Button>
-              </CardContent>
-            </Card>
+                
+                <CardContent className="p-6 flex-grow flex flex-col justify-end"> {/* Flex-grow para ocupar espacio restante, justify-end para anclar abajo */}
+                  {/* Contenedor para el texto que se sube */}
+                  <motion.div
+                    className="transition-transform duration-300 group-hover:-translate-y-2" // Efecto de subida al hover
+                  >
+                    <h3 className="text-xl font-semibold mb-2">
+                      {article.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      {article.excerpt}
+                    </p>
+                  </motion.div>
+                </CardContent>
+              </Card>
             </motion.div>
           ))}
         </div>
 
-        <motion.div 
+        {/* El botón "Ver todas las noticias" parece no estar en este diseño específico, lo comentamos o quitamos */}
+        {/* <motion.div 
           className="text-center mt-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -132,7 +116,7 @@ const NewsSection = () => {
           >
             Ver todas las noticias
           </Button>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );
