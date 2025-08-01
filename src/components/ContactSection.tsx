@@ -27,10 +27,26 @@ const NewsletterSection = () => {
           {/* Right section: Form */}
           <div className="flex flex-col space-y-6">
             <div className="space-y-4">
-              <Input type="email" placeholder="Email Address" className="h-12 border-b border-gray-300 rounded-none focus:ring-0 focus:border-black" />
-              <Input type="text" placeholder="First Name" className="h-12 border-b border-gray-300 rounded-none focus:ring-0 focus:border-black" />
-              <Input type="text" placeholder="Last Name" className="h-12 border-b border-gray-300 rounded-none focus:ring-0 focus:border-black" />
-              <Input type="text" placeholder="Zip Code" className="h-12 border-b border-gray-300 rounded-none focus:ring-0 focus:border-black" />
+              <Input 
+                type="email" 
+                placeholder="Email Address" 
+                className="h-12 border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
+              />
+              <Input 
+                type="text" 
+                placeholder="First Name" 
+                className="h-12 border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
+              />
+              <Input 
+                type="text" 
+                placeholder="Last Name" 
+                className="h-12 border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
+              />
+              <Input 
+                type="text" 
+                placeholder="Zip Code" 
+                className="h-12 border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
+              />
             </div>
             <Button className="w-full bg-black text-white py-6 px-4 font-normal hover:bg-gray-800 transition-colors duration-300">
               Subscribe
