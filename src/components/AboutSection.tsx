@@ -69,7 +69,7 @@ const AboutSection = () => {
             viewport={{ once: true, amount: 0.3 }}
           >
             <div className="bg-white p-4 shadow-lg border border-gray-200">
-              <h3 className="text-center text-lg font-semibold mb-2 text-gray-700">PRESIDENTIAL FUNERALS</h3>
+              <h3 className="text-center text-lg font-semibold mb-2 text-gray-700">CULTURA CARAL</h3>
               <img 
                 src={museumMainImage} 
                 alt="Presidential Funerals Exhibit" 
@@ -87,7 +87,7 @@ const AboutSection = () => {
             viewport={{ once: true, amount: 0.3 }}
           >
             <p>
-              Learn about caskets and coffins, hearses through history, plus the funerals of Presidents, Popes, celebrities and more while you witness the cultural heritage of the funeral service industry and its time-honored tradition of compassion.
+               Desarrollamos actividades de investigación científica, conservación del patrimonio cultural, gestión sostenible del territorio y promoción del desarrollo social y económico de las comunidades locales, contribuyendo al fortalecimiento de la identidad cultural nacional.
             </p>
           </motion.div>
 
