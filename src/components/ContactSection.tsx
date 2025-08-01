@@ -27,26 +27,34 @@ const NewsletterSection = () => {
           {/* Right section: Form */}
           <div className="flex flex-col space-y-6">
             <div className="space-y-4">
-              <Input 
-                type="email" 
-                placeholder="Email Address" 
-                className="h-12 border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
-              />
-              <Input 
-                type="text" 
-                placeholder="First Name" 
-                className="h-12 border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
-              />
-              <Input 
-                type="text" 
-                placeholder="Last Name" 
-                className="h-12 border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
-              />
-              <Input 
-                type="text" 
-                placeholder="Zip Code" 
-                className="h-12 border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
-              />
+              <div className="pb-2 border-b border-gray-300">
+                <Input 
+                  type="email" 
+                  placeholder="Email Address" 
+                  className="h-12 border-none bg-white focus-visible:ring-0 focus-visible:ring-offset-0" 
+                />
+              </div>
+              <div className="pb-2 border-b border-gray-300">
+                <Input 
+                  type="text" 
+                  placeholder="First Name" 
+                  className="h-12 border-none bg-white focus-visible:ring-0 focus-visible:ring-offset-0" 
+                />
+              </div>
+              <div className="pb-2 border-b border-gray-300">
+                <Input 
+                  type="text" 
+                  placeholder="Last Name" 
+                  className="h-12 border-none bg-white focus-visible:ring-0 focus-visible:ring-offset-0" 
+                />
+              </div>
+              <div className="pb-2 border-b border-gray-300">
+                <Input 
+                  type="text" 
+                  placeholder="Zip Code" 
+                  className="h-12 border-none bg-white focus-visible:ring-0 focus-visible:ring-offset-0" 
+                />
+              </div>
             </div>
             <Button 
               className="w-full text-white py-6 px-4 font-normal transition-colors duration-300"
