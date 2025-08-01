@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Facebook, Youtube, Instagram, Mail, Phone, MapPin, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion"; // Import motion
-import zacLogo from "@/assets/zac-logo.png"; // Assuming this path is correct for your logo
+import { motion } from "framer-motion";
+import zacLogo from "@/assets/zac-logo.png"; // Asegúrate de que esta ruta sea correcta
 
 const Footer = () => {
+  // Contenido de tu código original
   const institutionLinks = [
     { name: "Institución", href: "#" },
     { name: "Museo Caral", href: "#" },
@@ -37,13 +38,21 @@ const Footer = () => {
     "CONCYTEC",
   ];
 
+  // Datos para la sección "Horario" (basado en la imagen de referencia)
+  const hoursInfo = {
+    title: "Horario",
+    days: "Abierto: Miércoles - Lunes",
+    time: "10am - 5pm",
+    exceptions: ["Cerrado los Martes", "Días Feriados: Día de Acción de Gracias, Navidad,", "Víspera de Año Nuevo, y Año Nuevo"],
+  };
+
   // Animation variants for staggered fade-in
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1, // Stagger children by 0.1 seconds
+        staggerChildren: 0.1,
       },
     },
   };
@@ -61,23 +70,43 @@ const Footer = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }} // Animate when 20% of element is in view
+          viewport={{ once: true, amount: 0.2 }}
         >
-          {/* Brand & Description */}
+          {/* Columna 1: Información del Museo (equivalente a "The Mütter Museum" en la imagen) */}
           <motion.div variants={itemVariants}>
             <div className="flex items-center justify-start mb-6">
-              <img 
-                src={zacLogo} 
-                alt="ZAC Logo" 
+              <img
+                src={zacLogo}
+                alt="ZAC Logo"
                 className="h-16 w-auto object-contain"
               />
             </div>
-            <p className="text-caral-sand leading-relaxed mb-6">
-              La Civilización más antigua de América. Patrimonio Mundial de la Humanidad 
+            <p className="text-caral-sand leading-relaxed mb-6 text-sm">
+              La Civilización más antigua de América. Patrimonio Mundial de la Humanidad
               que preserva 5000 años de historia y cultura peruana.
             </p>
-            
-            {/* Social Media */}
+
+            {/* Información de Contacto */}
+            <div className="space-y-3 mb-6">
+              <div className="flex items-start space-x-2">
+                <MapPin className="h-4 w-4 text-caral-ochre mt-1 flex-shrink-0" />
+                <div className="text-caral-sand text-sm">
+                  {contactInfo.address.map((line, i) => (
+                    <p key={i}>{line}</p>
+                  ))}
+                </div>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Phone className="h-4 w-4 text-caral-ochre flex-shrink-0" />
+                <span className="text-caral-sand text-sm">{contactInfo.phone}</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Mail className="h-4 w-4 text-caral-ochre flex-shrink-0" />
+                <span className="text-caral-sand text-sm">{contactInfo.email}</span>
+              </div>
+            </div>
+
+            {/* Redes Sociales */}
             <div className="flex space-x-3">
               <Button variant="ghost" size="sm" className="text-caral-sand hover:text-white hover:bg-white/10">
                 <Facebook className="h-5 w-5" />
@@ -91,16 +120,16 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          {/* Institution Links (Formerly Quick Links) */}
+          {/* Columna 2: Visita (basado en la sección "Visit" de la imagen) */}
           <motion.div variants={itemVariants}>
-            <h4 className="text-lg font-semibold mb-6">Institución</h4>
+            <h4 className="text-lg font-semibold mb-6">Visita</h4>
             <ul className="space-y-3">
-              {institutionLinks.map((link) => (
+              {visitLinks.map((link) => (
                 <li key={link.name}>
-                  <Button 
-                    variant="ghost" 
-                    className="p-0 h-auto text-caral-sand hover:text-white justify-start"
-                    asChild // Render as an anchor tag for navigation
+                  <Button
+                    variant="ghost"
+                    className="p-0 h-auto text-caral-sand hover:text-white justify-start text-sm"
+                    asChild
                   >
                     <a href={link.href}>{link.name}</a>
                   </Button>
@@ -109,61 +138,46 @@ const Footer = () => {
             </ul>
           </motion.div>
 
-          {/* Visit Links (Formerly Services) */}
+          {/* Columna 3: Horario y Comprar Entradas (basado en la sección "Hours" de la imagen) */}
           <motion.div variants={itemVariants}>
-            <h4 className="text-lg font-semibold mb-6">Visita</h4>
-            <ul className="space-y-3">
-              {visitLinks.map((service) => (
-                <li key={service.name}>
-                  <Button 
-                    variant="ghost" 
-                    className="p-0 h-auto text-caral-sand hover:text-white justify-start"
-                    asChild
-                  >
-                    <a href={service.href}>{service.name}</a>
-                  </Button>
-                </li>
+            <h4 className="text-lg font-semibold mb-6">{hoursInfo.title}</h4>
+            <div className="text-caral-sand space-y-2 mb-8 text-sm">
+              <p>{hoursInfo.days}</p>
+              <p>{hoursInfo.time}</p>
+              {hoursInfo.exceptions.map((exc, i) => (
+                <p key={i} className="text-xs italic opacity-80">{exc}</p>
               ))}
-            </ul>
-          </motion.div>
-
-          {/* Contact Info & Call to Action (Tickets) */}
-          <motion.div variants={itemVariants}>
-            <h4 className="text-lg font-semibold mb-6">Contacto</h4>
-            <div className="space-y-4 mb-8">
-              <div className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 text-caral-ochre mt-0.5 flex-shrink-0" />
-                <div className="text-caral-sand">
-                  {contactInfo.address.map((line, i) => (
-                    <p key={i}>{line}</p>
-                  ))}
-                </div>
-              </div>
-              
-              <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-caral-ochre" />
-                <span className="text-caral-sand">{contactInfo.phone}</span>
-              </div>
-              
-              <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-caral-ochre" />
-                <span className="text-caral-sand">{contactInfo.email}</span>
-              </div>
             </div>
 
-            {/* Call to Action: Buy Tickets / Explore */}
-            <h4 className="text-lg font-semibold mb-4">Experiencia Caral</h4>
             <Button className="bg-caral-ochre hover:bg-caral-ochre/80 text-caral-earth font-bold py-3 px-6 rounded-lg shadow-md flex items-center space-x-2">
               <span>Comprar Entradas</span>
               <ArrowRight className="h-4 w-4" />
             </Button>
           </motion.div>
+
+          {/* Columna 4: Institución/Acerca de (basado en la sección "About" de la imagen) */}
+          <motion.div variants={itemVariants}>
+            <h4 className="text-lg font-semibold mb-6">Institución</h4>
+            <ul className="space-y-3">
+              {institutionLinks.map((link) => (
+                <li key={link.name}>
+                  <Button
+                    variant="ghost"
+                    className="p-0 h-auto text-caral-sand hover:text-white justify-start text-sm"
+                    asChild
+                  >
+                    <a href={link.href}>{link.name}</a>
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
         </motion.div>
 
         <Separator className="my-12 bg-caral-sand/20" />
 
-        {/* Partners */}
-        <motion.div 
+        {/* Instituciones Colaboradoras */}
+        <motion.div
           className="mb-12"
           variants={itemVariants}
           initial="hidden"
@@ -173,7 +187,7 @@ const Footer = () => {
           <h4 className="text-lg font-semibold mb-6 text-center">Instituciones Colaboradoras</h4>
           <div className="flex flex-wrap justify-center items-center gap-8">
             {partners.map((partner) => (
-              <div key={partner} className="text-caral-sand hover:text-white transition-colors cursor-pointer">
+              <div key={partner} className="text-caral-sand hover:text-white transition-colors cursor-pointer text-sm">
                 {partner}
               </div>
             ))}
@@ -182,18 +196,18 @@ const Footer = () => {
 
         <Separator className="mb-8 bg-caral-sand/20" />
 
-        {/* Bottom */}
-        <motion.div 
-          className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
+        {/* Sección Inferior del Footer (Copyright y Enlaces Legales) */}
+        <motion.div
+          className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm"
           variants={itemVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <div className="text-caral-sand text-sm">
+          <div className="text-caral-sand">
             © 2024 Zona Arqueológica Caral. Todos los derechos reservados.
           </div>
-          <div className="flex space-x-6 text-sm">
+          <div className="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2 text-sm">
             <Button variant="ghost" className="p-0 h-auto text-caral-sand hover:text-white">
               Política de Privacidad
             </Button>
