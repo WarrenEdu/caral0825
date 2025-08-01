@@ -21,10 +21,15 @@ const Header = () => {
   }, []);
 
   // Determina la clase de fondo del header
-  const headerBgClass = 
-    isScrolled || activeDropdown || isMenuOpen // Fondo rojo si hay scroll, dropdown abierto O menú móvil abierto
-      ? RED_COLOR_CLASS + ' shadow-lg' 
-      : 'bg-transparent';
+  const headerBgClass = () => {
+    if (isScrolled || activeDropdown) { // Siempre rojo si hay scroll o dropdown de escritorio
+      return RED_COLOR_CLASS + ' shadow-lg';
+    }
+    if (isMenuOpen && window.innerWidth < 1024) { // Solo rojo si menú móvil abierto Y en móvil
+      return RED_COLOR_CLASS + ' shadow-lg';
+    }
+    return 'bg-transparent'; // Transparente por defecto
+  };
 
   const allMenuItems = [
     { 
@@ -131,7 +136,7 @@ const Header = () => {
 
   return (
     <motion.header 
-      className={`fixed top-0 w-full z-50 transition-all duration-300 font-barlow ${headerBgClass}`} // Usa la clase calculada
+      className={`fixed top-0 w-full z-50 transition-all duration-300 font-barlow ${headerBgClass()}`} // Llama a la función para la clase
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
@@ -140,13 +145,13 @@ const Header = () => {
         className="container mx-auto px-4"
         onMouseLeave={() => setActiveDropdown(null)} 
       >
-        <div className="flex items-center justify-between h-20">
-          {/* Logo (visible siempre, pero con diferente posición en desktop/mobile) */}
-          <div className="flex items-center lg:mx-10"> {/* mx-10 para desktop, flex para que siempre sea visible */}
+        <div className="flex items-center justify-between h-20 relative"> {/* Añadido 'relative' para el posicionamiento absoluto del logo en desktop */}
+          {/* Logo para Mobile (visible solo en mobile, a la izquierda) */}
+          <div className="lg:hidden flex items-center">
             <img 
               src={caralLogoBanner} 
               alt="Caral Logo" 
-              className="h-12 lg:h-16 w-auto object-contain" // h-12 para mobile, h-16 para desktop
+              className="h-12 w-auto object-contain" 
             />
           </div>
 
@@ -173,7 +178,16 @@ const Header = () => {
             </div>
           </nav>
 
-          {/* Desktop Navigation - Right Side (se muestra a la derecha del logo en desktop) */}
+          {/* Logo Central (para desktop) - Vuelve a ser absoluto */}
+          <div className="absolute left-1/2 -translate-x-1/2 hidden lg:flex items-center">
+            <img 
+              src={caralLogoBanner} 
+              alt="Caral Logo" 
+              className="h-16 w-auto object-contain" 
+            />
+          </div>
+
+          {/* Desktop Navigation - Right Side */}
           <nav className="hidden lg:flex flex-1 justify-start items-center pl-6">
             <div className="flex gap-x-8">
               {rightMenuItems.map((menuItem) => (
@@ -203,7 +217,7 @@ const Header = () => {
             className="lg:hidden text-white ml-auto" 
             onClick={() => {
               setIsMenuOpen(!isMenuOpen);
-              setActiveDropdown(null); // Asegura que los dropdowns de escritorio se cierren al abrir el móvil
+              setActiveDropdown(null); 
             }}
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -228,18 +242,18 @@ const Header = () => {
       {isMenuOpen && (
         <motion.div
           className={`lg:hidden py-4 border-t border-gray-700 ${RED_COLOR_CLASS} shadow-lg`} 
-          initial={{ opacity: 0, height: 0 }} // Inicia sin altura y transparente
-          animate={{ opacity: 1, height: "auto" }} // Se desliza hacia abajo y aparece
-          exit={{ opacity: 0, height: 0 }}    // Efecto al salir
+          initial={{ opacity: 0, height: 0 }} 
+          animate={{ opacity: 1, height: "auto" }} 
+          exit={{ opacity: 0, height: 0 }}    
           transition={{ duration: 0.3, ease: "easeOut" }}
-          style={{ overflow: 'hidden' }} // Asegura que el contenido se recorte durante la animación
+          style={{ overflow: 'hidden' }} 
         >
           <nav className="flex flex-col space-y-2 px-4">
             {allMenuItems.map((menuItem) => (
               <div key={menuItem.title}>
                 <Button 
                   variant="ghost" 
-                  className="justify-start text-white hover:bg-white/10 w-full"
+                  className="justify-start text-white hover:bg-white/10 w-full" 
                   onClick={() => setActiveDropdown(activeDropdown === menuItem.title ? null : menuItem.title)}
                 >
                   {menuItem.title}
