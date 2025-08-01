@@ -156,7 +156,7 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation - Left Side */}
-          <nav className="hidden lg:flex flex-1 justify-end items-center pr-6" style={{ paddingLeft: '29.5rem' }}>
+          <nav className="hidden lg:flex flex-1 justify-end items-center pr-6">
             <div className="flex gap-x-8">
               {leftMenuItems.map((menuItem) => (
                 <div 
@@ -188,7 +188,7 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation - Right Side */}
-          <nav className="hidden lg:flex flex-1 justify-start items-center pl-6" style={{ paddingLeft: '29.5rem' }}>
+          <nav className="hidden lg:flex flex-1 justify-start items-center pl-6" >
             <div className="flex gap-x-8">
               {rightMenuItems.map((menuItem) => (
                 <div 
