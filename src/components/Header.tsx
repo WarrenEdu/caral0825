@@ -188,7 +188,7 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation - Right Side */}
-          <nav className="hidden lg:flex flex-1 justify-start items-center pl-[29.5rem]" >
+          <nav className="hidden lg:flex flex-1 justify-start items-center pl-[3.5rem]" >
             <div className="flex gap-x-8">
               {rightMenuItems.map((menuItem) => (
                 <div 
