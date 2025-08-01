@@ -17,7 +17,7 @@ const AboutSection = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true, amount: 0.2 }}
         >
-          The National Museum of Funeral History
+           SOBRE NOSOTROS
         </motion.p>
 
         {/* Título principal con líneas decorativas */}
@@ -30,7 +30,7 @@ const AboutSection = () => {
         >
           <div className="flex-grow border-t border-gray-300 max-w-[100px]"></div>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-700 leading-tight tracking-wider uppercase whitespace-nowrap">
-            WELCOME TO OUR MUSEUM
+            La Zona Arqueológica Caral
           </h2>
           <div className="flex-grow border-t border-gray-300 max-w-[100px]"></div>
         </motion.div>
@@ -48,12 +48,12 @@ const AboutSection = () => {
             viewport={{ once: true, amount: 0.3 }}
           >
             <p className="mb-4">
-              The National Museum of Funeral History is an educational experience like no other and offers something for everyone. Discover America's largest collection of authentic, historical funeral service items.
+              La Zona Arqueológica Caral es responsable de las actividades de investigación, conservación y difusión de los valores sociales y culturales de Caral, la Civilización más antigua de América.
             </p>
             
             {/* Texto de logos/premios (ya no se renderizan las imágenes) */}
             <div className="mt-6 space-y-4">
-              <p className="text-xs font-semibold text-gray-500">NATIONAL MUSEUM OF FUNERAL HISTORY</p> 
+              <p className="text-xs font-semibold text-gray-500">Caral</p> 
               <div className="flex items-center space-x-4">
                 <p className="text-xs text-gray-500 italic">Aquí irían los logos de premios</p>
               </div>
