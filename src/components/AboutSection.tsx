@@ -36,7 +36,8 @@ const AboutSection = () => {
         </motion.div>
 
         {/* Contenido principal: texto + imagen + texto */}
-        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between lg:gap-16">
+        {/* *** CAMBIO CLAVE AQUÍ: lg:items-center *** */}
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-16">
           
           {/* Left Text Block */}
           <motion.div
@@ -72,8 +73,7 @@ const AboutSection = () => {
               <img 
                 src={museumMainImage} 
                 alt="Presidential Funerals Exhibit" 
-                // *** CAMBIO CLAVE AQUÍ ***
-                className="w-full h-[500px] object-cover" // Aumentado la altura a 500px. object-cover para recortar si es necesario.
+                className="w-full h-[500px] object-cover" 
               />
             </div>
           </motion.div>
@@ -82,7 +82,7 @@ const AboutSection = () => {
           <motion.div
             className="lg:w-1/3 text-gray-600 text-sm leading-relaxed"
             initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true, amount: 0.3 }}
           >
