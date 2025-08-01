@@ -22,12 +22,12 @@ const Header = () => {
   }, []);
 
   const menuItems = [
-    { title: "EXPERIENCE", href: "#" },
-    { title: "EXHIBITS", href: "#" },
-    { title: "LEARNING", href: "#" },
-    { title: "BLOG", href: "#" },
-    { title: "ABOUT", href: "#" },
-    { title: "SUPPORT", href: "#" },
+    { title: "INSTRITUCION", href: "#" },
+    { title: "MUSEO CARAL", href: "#" },
+    { title: "RUTA CARAL", href: "#" },
+    { title: "CONOCENOS", href: "#" },
+    { title: "COMUNICACION", href: "#" },
+    { title: "PUBLICACIONES", href: "#" },
   ];
 
   // Contenido común para todos los dropdowns
