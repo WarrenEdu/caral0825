@@ -26,7 +26,7 @@ const NewsSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-stone-200 text-gray-800">
+    <section className="py-20 bg-stone-200 text-gray-800"> {/* Fondo beige */}
       <div className="container mx-auto px-4 max-w-5xl">
         
         {/* Encabezado con cita y flechas de navegación */}
@@ -69,7 +69,7 @@ const NewsSection = () => {
             >
               <Card className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col group relative">
                 <div className="relative overflow-hidden">
-                  {/* Contenedor de la imagen - la imagen no se moverá ni recortará por sí misma */}
+                  {/* Contenedor de la imagen - la imagen no se mueve ni recorta por sí misma */}
                   <div className="h-48 relative overflow-hidden">
                     <img 
                       src={article.image} 
@@ -80,13 +80,11 @@ const NewsSection = () => {
                 </div>
                 
                 {/* Contenido de la tarjeta - Título y Excerpt siempre visibles, con efecto de cubrimiento */}
-                <CardContent className="p-6 pt-4 flex-grow flex flex-col justify-end relative z-10">
+                <CardContent className="p-0 flex-grow flex flex-col justify-end relative z-10"> {/* Removed padding here, moved to inner div */}
                   {/* Contenedor para el texto que se subirá y cubrirá la imagen */}
                   <motion.div
-                    className="absolute bottom-0 left-0 right-0 p-6 pt-4 bg-white transition-transform duration-300" // Fondo blanco para cubrir la imagen
-                    // initial={{ y: 0 }} // Siempre visible
-                    // animate={{ y: 0 }} // Siempre visible
-                    whileHover={{ y: -60 }} // Ajusta este valor para la cantidad de "recorte" de la imagen
+                    className="absolute bottom-0 left-0 right-0 p-6 pt-4 bg-white transition-transform duration-300" /* Fondo blanco para cubrir la imagen */
+                    whileHover={{ y: -20 }} /* Ajustado a -20px para un recorte más sutil como en image_e687ef.png */
                   >
                     <h3 className="text-xl font-semibold mb-2">
                       {article.title}
