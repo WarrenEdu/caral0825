@@ -44,14 +44,14 @@ const HeroSection = () => {
       </div>
 
       {/* Botón flotante "TICKETS" */}
-      <aside className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20">
+      {/*<aside className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20">
         <Button
           className="bg-gray-300 text-gray-800 text-sm md:text-base py-5 px-2 md:py-6 md:px-3 uppercase rounded-md shadow-lg hover:bg-gray-400 transition-colors duration-300"
           style={{ writingMode: 'vertical-lr' }}
         >
           TICKETS
         </Button>
-      </aside>
+      </aside>*/}
 
       {/* Imagen pequeña en la esquina inferior derecha (opcional, si aún la deseas) */}
       {/* <div className="absolute bottom-4 right-4 z-10">
