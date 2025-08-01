@@ -6,12 +6,12 @@ const museumMainImage = "https://nesweip.com/boceto_larco/imagenes/PERSONAL_Lima
 
 const AboutSection = () => {
   return (
-    <section className="py-20 bg-white text-gray-800 font-serif"> {/* Fondo blanco y fuente serif para parecerse a la imagen */}
-      <div className="container mx-auto px-4 max-w-7xl"> {/* Contenedor más amplio */}
+    <section className="py-20 bg-white text-gray-800 font-serif">
+      <div className="container mx-auto px-4 max-w-7xl">
         
         {/* Subtítulo superior */}
         <motion.p 
-          className="text-gray-500 text-center text-sm mb-2" // Color y tamaño de fuente
+          className="text-gray-500 text-center text-sm mb-2"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -22,17 +22,17 @@ const AboutSection = () => {
 
         {/* Título principal con líneas decorativas */}
         <motion.div
-          className="flex items-center justify-center mb-12 gap-x-4" // Centrar el título y las líneas
+          className="flex items-center justify-center mb-12 gap-x-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           viewport={{ once: true, amount: 0.2 }}
         >
-          <div className="flex-grow border-t border-gray-300 max-w-[100px]"></div> {/* Línea izquierda */}
+          <div className="flex-grow border-t border-gray-300 max-w-[100px]"></div>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-700 leading-tight tracking-wider uppercase whitespace-nowrap">
             WELCOME TO OUR MUSEUM
           </h2>
-          <div className="flex-grow border-t border-gray-300 max-w-[100px]"></div> {/* Línea derecha */}
+          <div className="flex-grow border-t border-gray-300 max-w-[100px]"></div>
         </motion.div>
 
         {/* Contenido principal: texto + imagen + texto */}
@@ -40,7 +40,7 @@ const AboutSection = () => {
           
           {/* Left Text Block */}
           <motion.div
-            className="lg:w-1/3 mb-8 lg:mb-0 text-gray-600 text-sm leading-relaxed" // Ancho y estilo de texto
+            className="lg:w-1/3 mb-8 lg:mb-0 text-gray-600 text-sm leading-relaxed"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -53,34 +53,34 @@ const AboutSection = () => {
             {/* Texto de logos/premios (ya no se renderizan las imágenes) */}
             <div className="mt-6 space-y-4">
               <p className="text-xs font-semibold text-gray-500">NATIONAL MUSEUM OF FUNERAL HISTORY</p> 
-              {/* Aquí es donde irían los logos de premios si los tuvieras, ahora es solo un placeholder de texto */}
               <div className="flex items-center space-x-4">
-                <p className="text-xs text-gray-500 italic">Aquí irían los logos de premios</p> {/* Placeholder de texto */}
+                <p className="text-xs text-gray-500 italic">Aquí irían los logos de premios</p>
               </div>
             </div>
           </motion.div>
 
           {/* Central Image Block */}
           <motion.div
-            className="lg:w-1/3 flex flex-col items-center justify-center mb-8 lg:mb-0" // Centrar la imagen en su columna
+            className="lg:w-1/3 flex flex-col items-center justify-center mb-8 lg:mb-0"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true, amount: 0.3 }}
           >
-            <div className="bg-white p-4 shadow-lg border border-gray-200"> {/* Contenedor para el "frame" blanco alrededor de la imagen */}
+            <div className="bg-white p-4 shadow-lg border border-gray-200">
               <h3 className="text-center text-lg font-semibold mb-2 text-gray-700">PRESIDENTIAL FUNERALS</h3>
               <img 
-                src={museumMainImage} // Usa la URL directa
+                src={museumMainImage} 
                 alt="Presidential Funerals Exhibit" 
-                className="w-full h-auto object-cover max-h-[400px]" // Ajusta el tamaño de la imagen
+                // *** CAMBIO CLAVE AQUÍ ***
+                className="w-full h-[500px] object-cover" // Aumentado la altura a 500px. object-cover para recortar si es necesario.
               />
             </div>
           </motion.div>
 
           {/* Right Text Block */}
           <motion.div
-            className="lg:w-1/3 text-gray-600 text-sm leading-relaxed" // Ancho y estilo de texto
+            className="lg:w-1/3 text-gray-600 text-sm leading-relaxed"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -95,7 +95,7 @@ const AboutSection = () => {
 
         {/* Botón "Tickets to the Museum" - Alineado a la derecha, debajo de todo */}
         <motion.div
-          className="flex justify-end mt-12" // Alineación a la derecha y margen superior
+          className="flex justify-end mt-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
@@ -103,7 +103,7 @@ const AboutSection = () => {
         >
           <Button
             size="lg"
-            className="bg-stone-200 hover:bg-stone-300 text-gray-700 font-semibold px-8 py-4 rounded-none uppercase tracking-wide text-sm" // Estilo del botón similar a la imagen
+            className="bg-stone-200 hover:bg-stone-300 text-gray-700 font-semibold px-8 py-4 rounded-none uppercase tracking-wide text-sm"
           >
             Tickets to the Museum
           </Button>
