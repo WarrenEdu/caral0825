@@ -67,13 +67,9 @@ const NewsSection = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              {/* Aplicamos motion.div y el whileHover a la Card completa */}
-              <motion.div
-                className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col group relative"
-                whileHover={{ y: -20 }} // Movimiento hacia arriba de toda la tarjeta al hover
-                transition={{ duration: 0.3 }}
-              >
-                {/* Contenedor de la imagen */}
+              {/* La Card principal ahora es el 'group' */}
+              <Card className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col group relative">
+                {/* Contenedor de la imagen - se mantiene fijo */}
                 <div className="h-48 relative overflow-hidden">
                   <img 
                     src={article.image} 
@@ -82,16 +78,25 @@ const NewsSection = () => {
                   />
                 </div>
                 
-                {/* Contenedor del texto (sin movimiento individual) */}
-                <div className="p-6 pt-4 bg-white"> {/* Ya no es motion.div ni tiene whileHover */}
+                {/* Contenedor del texto - Se mueve hacia arriba al hacer hover en el 'group' padre */}
+                <motion.div
+                  className="p-6 pt-4 bg-white transition-transform duration-300"
+                  // Aquí aplicamos el movimiento condicional al hover del grupo padre
+                  variants={{
+                    initial: { y: 0 },
+                    hover: { y: -60 } // Ajusta este valor para cuánto quieres que el texto cubra la imagen
+                  }}
+                  initial="initial"
+                  whileHover="hover"
+                >
                   <h3 className="text-xl font-semibold mb-2">
                     {article.title}
                   </h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
                     {article.excerpt}
                   </p>
-                </div>
-              </motion.div>
+                </motion.div>
+              </Card>
             </motion.div>
           ))}
         </div>
