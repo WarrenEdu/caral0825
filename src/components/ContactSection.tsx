@@ -30,25 +30,28 @@ const NewsletterSection = () => {
               <Input 
                 type="email" 
                 placeholder="Email Address" 
-                className="h-12 border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
+                className="h-12 border-none border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
               />
               <Input 
                 type="text" 
                 placeholder="First Name" 
-                className="h-12 border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
+                className="h-12 border-none border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
               />
               <Input 
                 type="text" 
                 placeholder="Last Name" 
-                className="h-12 border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
+                className="h-12 border-none border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
               />
               <Input 
                 type="text" 
                 placeholder="Zip Code" 
-                className="h-12 border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
+                className="h-12 border-none border-b border-gray-300 rounded-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-black bg-white" 
               />
             </div>
-            <Button className="w-full bg-black text-white py-6 px-4 font-normal hover:bg-gray-800 transition-colors duration-300">
+            <Button 
+              className="w-full text-white py-6 px-4 font-normal transition-colors duration-300"
+              style={{ backgroundColor: 'rgb(180, 24, 35)' }}
+            >
               Subscribe
             </Button>
           </div>
