@@ -48,7 +48,9 @@ const NewsSection = () => {
           </div>
 
           <p className="italic text-xl md:text-2xl mb-6 text-gray-800"> {/* Color de texto ajustado */}
-            NOTICIAS
+            “This might be my most favorite museum in Chicago. [Griffin MSI has] done a <br className="hidden md:block" />
+            lot to take it beyond the ‘80s style exhibits into more, flashy 21st century <br className="hidden md:block" />
+            displays.”
           </p>
           <p className="text-sm text-gray-600"> {/* Color de texto ajustado */}
             Rachel Azark, CBS Chicago
