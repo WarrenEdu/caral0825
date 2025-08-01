@@ -26,7 +26,7 @@ const NewsSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-[rgb(21,55,108)] text-white">
+    <section className="py-20 bg-stone-200 text-gray-800"> {/* Fondo beige */}
       <div className="container mx-auto px-4 max-w-5xl">
         
         {/* Encabezado con cita y flechas de navegación */}
@@ -39,20 +39,20 @@ const NewsSection = () => {
         >
           {/* Flechas de navegación (visuales, sin funcionalidad) */}
           <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 flex justify-between items-center z-10 pointer-events-none">
-            <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 rounded-full w-10 h-10 pointer-events-auto">
+            <Button variant="ghost" size="icon" className="text-gray-600 hover:bg-gray-600/20 rounded-full w-10 h-10 pointer-events-auto"> {/* Color de flechas ajustado */}
               <ArrowLeft className="h-6 w-6" />
             </Button>
-            <Button variant="ghost" size="icon" className="text-white hover:bg-white/20 rounded-full w-10 h-10 pointer-events-auto">
+            <Button variant="ghost" size="icon" className="text-gray-600 hover:bg-gray-600/20 rounded-full w-10 h-10 pointer-events-auto"> {/* Color de flechas ajustado */}
               <ArrowRight className="h-6 w-6" />
             </Button>
           </div>
 
-          <p className="italic text-xl md:text-2xl mb-6">
+          <p className="italic text-xl md:text-2xl mb-6 text-gray-800"> {/* Color de texto ajustado */}
             “This might be my most favorite museum in Chicago. [Griffin MSI has] done a <br className="hidden md:block" />
             lot to take it beyond the ‘80s style exhibits into more, flashy 21st century <br className="hidden md:block" />
             displays.”
           </p>
-          <p className="text-sm text-gray-300">
+          <p className="text-sm text-gray-600"> {/* Color de texto ajustado */}
             Rachel Azark, CBS Chicago
           </p>
         </motion.div>
@@ -69,35 +69,26 @@ const NewsSection = () => {
             >
               <Card className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col group relative">
                 <div className="relative overflow-hidden">
-                  {/* Contenedor de la imagen para el efecto de recorte y subida */}
-                  {/* *** CAMBIO CLAVE AQUÍ: h-48 y group-hover:h-[calc(48*0.8px)] para un 80% de la altura inicial *** */}
-                  <div className="h-48 group-hover:h-[calc(48*0.8px)] transition-[height] duration-300 relative overflow-hidden"> {/* Ojo: Tailind no soporta calc() directamente en h-x, ajustamos a px para el ejemplo */}
+                  {/* Contenedor fijo para la imagen */}
+                  <div className="h-48 relative overflow-hidden"> {/* Altura fija para el div que contiene la imagen */}
                     <img 
                       src={article.image} 
                       alt={article.title}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:-translate-y-[10%]" /* Subida de la imagen */
+                      // Recorte sutil y subida: imagen ocupa el 110% de su contenedor y se mueve un poco hacia arriba al hover
+                      className="w-full h-[110%] object-cover transition-transform duration-300 group-hover:-translate-y-2" // Ajuste aquí
                     />
                   </div>
                 </div>
                 
-                {/* Contenido de la tarjeta - Título visible siempre, excerpt aparece al hover */}
+                {/* Contenido de la tarjeta - Solo el título visible */}
                 <CardContent className="p-6 pt-4 flex-grow flex flex-col justify-end relative z-10">
-                  {/* Título siempre visible */}
                   <h3 className="text-xl font-semibold mb-2">
                     {article.title}
                   </h3>
-
-                  {/* Excerpt que aparece al hover */}
-                  <motion.div
-                    className="absolute bottom-6 left-6 right-6 text-sm text-gray-600 leading-relaxed overflow-hidden"
-                    initial={{ opacity: 0, height: 0, y: 10 }}
-                    animate={{ opacity: 0, height: 0, y: 10 }}
-                    whileInView={{ opacity: 0, height: 0, y: 10 }}
-                    whileHover={{ opacity: 1, height: "auto", y: 0 }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                  >
-                    <p>{article.excerpt}</p>
-                  </motion.div>
+                  {/* El excerpt ya NO se mostrará ni se animará */}
+                  {/* <p className="text-sm text-gray-600 leading-relaxed">
+                    {article.excerpt}
+                  </p> */}
                 </CardContent>
               </Card>
             </motion.div>
