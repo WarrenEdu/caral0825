@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card"; // Solo necesitamos Card, CardContent se puede reemplazar con un div
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -67,9 +67,9 @@ const NewsSection = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              {/* La Card principal ahora es el 'group' */}
-              <Card className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col group relative">
-                {/* Contenedor de la imagen - se mantiene fijo */}
+              {/* La Card principal es el 'group' que detecta el hover */}
+              <Card className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col group">
+                {/* Contenedor de la imagen - se mantiene fijo y tiene altura definida */}
                 <div className="h-48 relative overflow-hidden">
                   <img 
                     src={article.image} 
@@ -79,15 +79,16 @@ const NewsSection = () => {
                 </div>
                 
                 {/* Contenedor del texto - Se mueve hacia arriba al hacer hover en el 'group' padre */}
+                {/* Usamos motion.div para la animación y group-hover para la detección */}
                 <motion.div
-                  className="p-6 pt-4 bg-white transition-transform duration-300"
-                  // Aquí aplicamos el movimiento condicional al hover del grupo padre
-                  variants={{
-                    initial: { y: 0 },
-                    hover: { y: -60 } // Ajusta este valor para cuánto quieres que el texto cubra la imagen
-                  }}
-                  initial="initial"
-                  whileHover="hover"
+                  className="p-6 pt-4 bg-white transition-transform duration-300 transform translate-y-0 group-hover:-translate-y-20" /* Aumenté el translate para que tape más */
+                  // También puedes usar variants si prefieres, pero group-hover es más directo aquí
+                  // variants={{
+                  //   initial: { y: 0 },
+                  //   hover: { y: -60 } 
+                  // }}
+                  // initial="initial"
+                  // whileHover="hover" // Esto se activaría si motion.div fuera el que detecta el hover
                 >
                   <h3 className="text-xl font-semibold mb-2">
                     {article.title}
