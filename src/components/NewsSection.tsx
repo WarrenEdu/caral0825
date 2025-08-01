@@ -26,7 +26,7 @@ const NewsSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-stone-200 text-gray-800"> {/* Fondo beige */}
+    <section className="py-20 bg-stone-200 text-gray-800">
       <div className="container mx-auto px-4 max-w-5xl">
         
         {/* Encabezado con cita y flechas de navegación */}
@@ -48,7 +48,12 @@ const NewsSection = () => {
           </div>
 
           <p className="italic text-xl md:text-2xl mb-6 text-gray-800">
-            NOTICIAS
+            “This might be my most favorite museum in Chicago. [Griffin MSI has] done a <br className="hidden md:block" />
+            lot to take it beyond the ‘80s style exhibits into more, flashy 21st century <br className="hidden md:block" />
+            displays.”
+          </p>
+          <p className="text-sm text-gray-600">
+            Rachel Azark, CBS Chicago
           </p>
         </motion.div>
 
@@ -62,7 +67,12 @@ const NewsSection = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col group relative">
+              {/* Aplicamos motion.div y el whileHover a la Card completa */}
+              <motion.div
+                className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col group relative"
+                whileHover={{ y: -20 }} // Movimiento hacia arriba de toda la tarjeta al hover
+                transition={{ duration: 0.3 }}
+              >
                 {/* Contenedor de la imagen */}
                 <div className="h-48 relative overflow-hidden">
                   <img 
@@ -72,20 +82,16 @@ const NewsSection = () => {
                   />
                 </div>
                 
-                {/* Contenedor del texto - Ahora inicialmente debajo de la imagen */}
-                <motion.div
-                  className="p-6 pt-4 bg-white transition-transform duration-300"
-                  // Usamos un valor negativo para subirlo y cubrir la imagen al hover
-                  whileHover={{ y: -60 }} // Ajusta este valor para controlar cuánto se superpone el texto a la imagen
-                >
+                {/* Contenedor del texto (sin movimiento individual) */}
+                <div className="p-6 pt-4 bg-white"> {/* Ya no es motion.div ni tiene whileHover */}
                   <h3 className="text-xl font-semibold mb-2">
                     {article.title}
                   </h3>
                   <p className="text-sm text-gray-600 leading-relaxed">
                     {article.excerpt}
                   </p>
-                </motion.div>
-              </Card>
+                </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
