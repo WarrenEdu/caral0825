@@ -1,8 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { motion, useAnimation } from "framer-motion"; // Importamos useAnimation
-import { useEffect } from "react"; // Necesario para useAnimation (aunque no se usa directamente en este ejemplo, es buena práctica)
+import { motion } from "framer-motion"; // Solo necesitamos motion
 
 const NewsSection = () => {
   const news = [
@@ -71,21 +70,20 @@ const NewsSection = () => {
 
 // Componente individual para cada tarjeta de noticias
 const NewsCard = ({ article, index }) => {
-  const imageControls = useAnimation(); // Controles para la imagen
-  const textControls = useAnimation();   // Controles para el texto
-
-  // Función para iniciar la animación al hacer hover en la tarjeta
-  const handleHoverStart = () => {
-    // Mueve la imagen ligeramente hacia arriba
-    imageControls.start({ y: -10, transition: { duration: 0.3, ease: "easeOut" } }); 
-    // Mueve el texto hacia arriba para cubrir la imagen
-    textControls.start({ y: -60, transition: { duration: 0.3, ease: "easeOut" } }); // Ajusta -60 para el recorte deseado
+  // Definimos las variantes para la animación de los hijos
+  const cardVariants = {
+    initial: { }, // Estado inicial de la tarjeta, no se mueve
+    hover: { },   // Estado de hover de la tarjeta, no se mueve
   };
 
-  // Función para revertir la animación al quitar el hover
-  const handleHoverEnd = () => {
-    imageControls.start({ y: 0, transition: { duration: 0.3, ease: "easeOut" } });
-    textControls.start({ y: 0, transition: { duration: 0.3, ease: "easeOut" } });
+  const imageVariants = {
+    initial: { y: 0 }, // Imagen en su posición inicial
+    hover: { y: -10, transition: { duration: 0.3, ease: "easeOut" } }, // Imagen se sube 10px
+  };
+
+  const textVariants = {
+    initial: { y: 0 }, // Texto en su posición inicial (debajo de la imagen)
+    hover: { y: -60, transition: { duration: 0.3, ease: "easeOut" } }, // Texto se sube 60px (ajusta este valor)
   };
 
   return (
@@ -95,17 +93,17 @@ const NewsCard = ({ article, index }) => {
       transition={{ duration: 0.6, delay: index * 0.1 }}
       viewport={{ once: true }}
     >
-      {/* La Card principal detecta el hover y tiene altura fija */}
-      <Card 
+      {/* La Card principal es un motion.div que detecta el hover y tiene altura fija */}
+      <motion.div
         className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col h-[400px]" // Altura fija para la tarjeta
-        onHoverStart={handleHoverStart} // Detecta el inicio del hover en toda la tarjeta
-        onHoverEnd={handleHoverEnd}     // Detecta el fin del hover en toda la tarjeta
+        variants={cardVariants} // No hay animación de la tarjeta en sí
+        initial="initial"
+        whileHover="hover" // Detecta el hover en toda la tarjeta
       >
-        {/* Contenedor de la imagen - ahora es un motion.div y se anima */}
+        {/* Contenedor de la imagen - es un motion.div y usa las variantes de imagen */}
         <motion.div 
           className="h-48 relative overflow-hidden"
-          animate={imageControls} // Vinculamos el div de la imagen a sus controles
-          initial={{ y: 0 }}     // Estado inicial de la imagen
+          variants={imageVariants} // Aplica las variantes de la imagen
         >
           <img 
             src={article.image} 
@@ -114,11 +112,10 @@ const NewsCard = ({ article, index }) => {
           />
         </motion.div>
         
-        {/* Contenedor del texto - ahora es un motion.div y se anima, con fondo blanco */}
+        {/* Contenedor del texto - es un motion.div y usa las variantes de texto */}
         <motion.div
           className="p-6 pt-4 bg-white flex-grow flex flex-col justify-end relative z-10" // z-10 para asegurar que el texto esté encima
-          animate={textControls} // Vinculamos el div del texto a sus controles
-          initial={{ y: 0 }}    // Estado inicial del texto
+          variants={textVariants} // Aplica las variantes del texto
         >
           <h3 className="text-xl font-semibold mb-2">
             {article.title}
@@ -127,7 +124,7 @@ const NewsCard = ({ article, index }) => {
             {article.excerpt}
           </p>
         </motion.div>
-      </Card>
+      </motion.div>
     </motion.div>
   );
 };
