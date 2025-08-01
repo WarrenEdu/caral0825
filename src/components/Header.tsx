@@ -20,6 +20,12 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Determina la clase de fondo del header
+  const headerBgClass = 
+    isScrolled || activeDropdown || isMenuOpen // Fondo rojo si hay scroll, dropdown abierto O menú móvil abierto
+      ? RED_COLOR_CLASS + ' shadow-lg' 
+      : 'bg-transparent';
+
   const allMenuItems = [
     { 
       title: "Institución", 
@@ -125,11 +131,7 @@ const Header = () => {
 
   return (
     <motion.header 
-      className={`fixed top-0 w-full z-50 transition-all duration-300 font-barlow ${
-        isScrolled || activeDropdown 
-          ? RED_COLOR_CLASS + ' shadow-lg' 
-          : 'bg-transparent'
-      }`}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 font-barlow ${headerBgClass}`} // Usa la clase calculada
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
@@ -139,18 +141,18 @@ const Header = () => {
         onMouseLeave={() => setActiveDropdown(null)} 
       >
         <div className="flex items-center justify-between h-20">
-          {/* Logo para Mobile (visible solo en mobile, a la izquierda) */}
-          <div className="lg:hidden flex items-center">
+          {/* Logo (visible siempre, pero con diferente posición en desktop/mobile) */}
+          <div className="flex items-center lg:mx-10"> {/* mx-10 para desktop, flex para que siempre sea visible */}
             <img 
               src={caralLogoBanner} 
               alt="Caral Logo" 
-              className="h-12 w-auto object-contain" // Ajustado tamaño para mobile
+              className="h-12 lg:h-16 w-auto object-contain" // h-12 para mobile, h-16 para desktop
             />
           </div>
 
           {/* Desktop Navigation - Left Side */}
           <nav className="hidden lg:flex flex-1 justify-end items-center pr-6">
-            <div className="flex gap-x-8"> {/* Ajustado gap-x de 10 a 8 para más espacio */}
+            <div className="flex gap-x-8">
               {leftMenuItems.map((menuItem) => (
                 <div 
                   key={menuItem.title} 
@@ -159,7 +161,7 @@ const Header = () => {
                 >
                   <a 
                     href={menuItem.href} 
-                    className={`flex items-center gap-1 text-white text-[12px] font-semibold hover:text-gray-300 transition-colors whitespace-nowrap`} {/* text-[13px] cambiado a text-[12px] */}
+                    className={`flex items-center gap-1 text-white text-[12px] font-semibold hover:text-gray-300 transition-colors whitespace-nowrap`}
                   >
                     {menuItem.title}
                     {menuItem.subItems.length > 0 && (
@@ -171,18 +173,9 @@ const Header = () => {
             </div>
           </nav>
 
-          {/* Logo Central (para desktop) */}
-          <div className="hidden lg:flex items-center mx-10"> {/* Ajustado mx de 12 a 10 */}
-            <img 
-              src={caralLogoBanner} 
-              alt="Caral Logo" 
-              className="h-16 w-auto object-contain" 
-            />
-          </div>
-
-          {/* Desktop Navigation - Right Side */}
+          {/* Desktop Navigation - Right Side (se muestra a la derecha del logo en desktop) */}
           <nav className="hidden lg:flex flex-1 justify-start items-center pl-6">
-            <div className="flex gap-x-8"> {/* Ajustado gap-x de 10 a 8 para más espacio */}
+            <div className="flex gap-x-8">
               {rightMenuItems.map((menuItem) => (
                 <div 
                   key={menuItem.title} 
@@ -191,7 +184,7 @@ const Header = () => {
                 >
                   <a 
                     href={menuItem.href} 
-                    className={`flex items-center gap-1 text-white text-[12px] font-semibold hover:text-gray-300 transition-colors whitespace-nowrap`} {/* text-[13px] cambiado a text-[12px] */}
+                    className={`flex items-center gap-1 text-white text-[12px] font-semibold hover:text-gray-300 transition-colors whitespace-nowrap`}
                   >
                     {menuItem.title}
                     {menuItem.subItems.length > 0 && (
@@ -207,8 +200,11 @@ const Header = () => {
           <Button
             variant="ghost"
             size="sm"
-            className="lg:hidden text-white ml-auto" // ml-auto lo empuja a la derecha
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="lg:hidden text-white ml-auto" 
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen);
+              setActiveDropdown(null); // Asegura que los dropdowns de escritorio se cierren al abrir el móvil
+            }}
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </Button>
@@ -231,18 +227,19 @@ const Header = () => {
       {/* Mobile Navigation (con efecto y color) */}
       {isMenuOpen && (
         <motion.div
-          className={`lg:hidden py-4 border-t border-gray-700 ${RED_COLOR_CLASS} shadow-lg`} {/* Aplicado RED_COLOR_CLASS */}
-          initial={{ opacity: 0, y: -20 }} // Inicia un poco arriba y transparente
-          animate={{ opacity: 1, y: 0 }}   // Se desliza hacia abajo y aparece
-          exit={{ opacity: 0, y: -20 }}    // Efecto al salir
+          className={`lg:hidden py-4 border-t border-gray-700 ${RED_COLOR_CLASS} shadow-lg`} 
+          initial={{ opacity: 0, height: 0 }} // Inicia sin altura y transparente
+          animate={{ opacity: 1, height: "auto" }} // Se desliza hacia abajo y aparece
+          exit={{ opacity: 0, height: 0 }}    // Efecto al salir
           transition={{ duration: 0.3, ease: "easeOut" }}
+          style={{ overflow: 'hidden' }} // Asegura que el contenido se recorte durante la animación
         >
           <nav className="flex flex-col space-y-2 px-4">
             {allMenuItems.map((menuItem) => (
               <div key={menuItem.title}>
                 <Button 
                   variant="ghost" 
-                  className="justify-start text-white hover:bg-white/10 w-full" // Ajustado hover para el nuevo fondo
+                  className="justify-start text-white hover:bg-white/10 w-full"
                   onClick={() => setActiveDropdown(activeDropdown === menuItem.title ? null : menuItem.title)}
                 >
                   {menuItem.title}
@@ -251,19 +248,26 @@ const Header = () => {
                   )}
                 </Button>
                 {activeDropdown === menuItem.title && menuItem.subItems.length > 0 && (
-                  <ul className="ml-4 mt-2 space-y-1">
+                  <motion.ul 
+                    className="ml-4 mt-2 space-y-1"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    style={{ overflow: 'hidden' }}
+                  >
                     {menuItem.subItems.map((subItem) => (
                       <li key={subItem}>
                         <a 
                           href="#" 
-                          className="block px-3 py-2 text-sm text-gray-200 hover:text-white hover:bg-white/10 rounded-md transition-colors" // Ajustado hover
+                          className="block px-3 py-2 text-sm text-gray-200 hover:text-white hover:bg-white/10 rounded-md transition-colors"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           {subItem}
                         </a>
                       </li>
                     ))}
-                  </ul>
+                  </motion.ul>
                 )}
               </div>
             ))}
