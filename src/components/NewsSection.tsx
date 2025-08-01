@@ -68,32 +68,28 @@ const NewsSection = () => {
               viewport={{ once: true }}
             >
               <Card className="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col group relative">
-                <div className="relative overflow-hidden">
-                  {/* Contenedor de la imagen - la imagen no se mueve ni recorta por sí misma */}
-                  <div className="h-48 relative overflow-hidden">
-                    <img 
-                      src={article.image} 
-                      alt={article.title}
-                      className="w-full h-full object-cover" /* La imagen se mantiene fija */
-                    />
-                  </div>
+                {/* Contenedor de la imagen */}
+                <div className="h-48 relative overflow-hidden">
+                  <img 
+                    src={article.image} 
+                    alt={article.title}
+                    className="w-full h-full object-cover" 
+                  />
                 </div>
                 
-                {/* Contenido de la tarjeta - Título y Excerpt siempre visibles, con efecto de cubrimiento */}
-                <CardContent className="p-0 flex-grow flex flex-col justify-end relative z-10"> {/* Removed padding here, moved to inner div */}
-                  {/* Contenedor para el texto que se subirá y cubrirá la imagen */}
-                  <motion.div
-                    className="absolute bottom-0 left-0 right-0 p-6 pt-4 bg-white transition-transform duration-300" /* Fondo blanco para cubrir la imagen */
-                    whileHover={{ y: -20 }} /* Ajustado a -20px para un recorte más sutil como en image_e687ef.png */
-                  >
-                    <h3 className="text-xl font-semibold mb-2">
-                      {article.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                      {article.excerpt}
-                    </p>
-                  </motion.div>
-                </CardContent>
+                {/* Contenedor del texto - Ahora inicialmente debajo de la imagen */}
+                <motion.div
+                  className="p-6 pt-4 bg-white transition-transform duration-300"
+                  // Usamos un valor negativo para subirlo y cubrir la imagen al hover
+                  whileHover={{ y: -60 }} // Ajusta este valor para controlar cuánto se superpone el texto a la imagen
+                >
+                  <h3 className="text-xl font-semibold mb-2">
+                    {article.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    {article.excerpt}
+                  </p>
+                </motion.div>
               </Card>
             </motion.div>
           ))}
