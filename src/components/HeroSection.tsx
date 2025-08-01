@@ -37,7 +37,7 @@ const HeroSection = () => {
               size="lg"
               className="px-8 py-4 text-lg border-2 border-white text-white bg-transparent uppercase hover:bg-white hover:text-black transition-colors duration-300"
             >
-              LA CIVILIZACIÓN MÁS ANTIGUA DE AMÉRICA
+              MAS INFORMACION
             </Button>
           </motion.div>
         </div>
