@@ -30,21 +30,21 @@ const NewsletterSection = () => {
               <div className="pb-2 border-b border-gray-300">
                 <Input 
                   type="email" 
-                  placeholder="Email Address" 
+                  placeholder="Correo" 
                   className="h-12 border-none bg-white focus-visible:ring-0 focus-visible:ring-offset-0" 
                 />
               </div>
               <div className="pb-2 border-b border-gray-300">
                 <Input 
                   type="text" 
-                  placeholder="First Name" 
+                  placeholder="Nombres" 
                   className="h-12 border-none bg-white focus-visible:ring-0 focus-visible:ring-offset-0" 
                 />
               </div>
               <div className="pb-2 border-b border-gray-300">
                 <Input 
                   type="text" 
-                  placeholder="Last Name" 
+                  placeholder="Apellidos" 
                   className="h-12 border-none bg-white focus-visible:ring-0 focus-visible:ring-offset-0" 
                 />
               </div>
@@ -60,7 +60,7 @@ const NewsletterSection = () => {
               className="w-full text-white py-6 px-4 font-normal transition-colors duration-300"
               style={{ backgroundColor: 'rgb(180, 24, 35)' }}
             >
-              Subscribe
+              Contactanos
             </Button>
           </div>
         </div>
